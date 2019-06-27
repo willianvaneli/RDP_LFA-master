@@ -104,24 +104,26 @@ def p_funcao(entrada):
     '''
     funcao  : NAME LPAR values RPAR
     '''
-    print("funcao")
     entrada[0]= ('func',entrada[1],entrada[3])
     
+
+def p_values_value(entrada):
+    '''
+    values  : NAME COMMA values
+            | NUMBER COMMA values
+    '''
+    entrada[0]= ('values',entrada[1],entrada[3])
+
 
 def p_values(entrada):
     '''
     values  : NUMBER
             | NAME
     '''
-    print("valor")
     entrada[0]= ('value',entrada[1])
 
 
-def p_value(entrada):
-    '''
-    values  : NAME COMMA values
-    '''
-    entrada[0]= ('values',entrada[1],entrada[3])
+
 
 def p_deffuncao(entrada):
     '''
@@ -273,7 +275,6 @@ def run(entrada):
             else:
                 return 'Undeclared variable found!'
         elif entrada[0] == 'def':
-            print(entrada[1])
             env['func'+entrada[1]] = []
             env['func'+entrada[1]].append([])
             env['func'+entrada[1]].append([])
@@ -282,7 +283,6 @@ def run(entrada):
             contexto = entrada[1]
             run(entrada[2])
             contexto=''
-            print('declarando funcao')
         elif entrada[0] == 'fcs':
             env['func'+contexto][0].append(entrada[1])
             run(entrada[2])
@@ -292,13 +292,12 @@ def run(entrada):
             contexto = entrada[1]
             run(entrada[2])
             rodaFuncao("func"+contexto)
-            print('salvou a funcao')
+            contexto=''
         elif entrada[0] == 'value':
             env['func'+contexto][2].append(entrada[1])
         elif entrada[0] == 'values':
             env['func'+contexto][2].append(entrada[1])
             run(entrada[2])
-            print('teoricamente rodaria a funcao')
     else:
         return entrada
 
@@ -307,24 +306,12 @@ def rodaFuncao (fun):
     if len(env[fun][0]) != len(env[fun][2]):
         print ("Entrada da funcao nao compativel com os parametros de entrada")
     else:
-        print("roda funcao")
-        print("funcao - " + fun)
-        print("Variaveis - ")
-        for i in env[fun][0]:
-            print(i+"\n")
-        print ("Contexto - ")
         i = 0
-        while (i < len(env[fun][1])) :
-            print (i)
-            print("\n")
-            env[contexto+env[fun][0][i]] = env[fun][2][i]
-            #env[fun][2][i] = 0
+        while (i < len(env[fun][2])) :
+            env[contexto+env[fun][0][i]] = env[fun][2][i]          
+            print(str(contexto+env[fun][0][i]) + " com o  valor " + str(env[fun][2][i]))
             i+=1
-        print ("valores atuais - \n")
-        for k in env[fun][2]:
-            print (k)
-            print("\n")
-        print ( run(env[fun][2]) )
+        print ( run(env[fun][1][0]) )
     
     return 0
 

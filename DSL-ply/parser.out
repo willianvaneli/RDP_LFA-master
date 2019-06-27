@@ -1,0 +1,1205 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ENDLINE
+
+Grammar
+
+Rule 0     S' -> contexto
+Rule 1     contexto -> deffuncao
+Rule 2     contexto -> funcao
+Rule 3     contexto -> expression
+Rule 4     funcao -> NAME LPAR values RPAR
+Rule 5     values -> NUMBER
+Rule 6     values -> NAME
+Rule 7     values -> NAME COMMA values
+Rule 8     deffuncao -> DEF NAME LPAR args RPAR bloco
+Rule 9     args -> NAME COMMA args
+Rule 10    args -> NAME
+Rule 11    expression -> term
+Rule 12    expression -> var_assign
+Rule 13    expression -> empty
+Rule 14    bloco -> LCHAVES expression RCHAVES
+Rule 15    var_assign -> NAME EQUALS term
+Rule 16    term -> term EXPONENT term
+Rule 17    term -> term MULTIPLY term
+Rule 18    term -> term DIVIDE term
+Rule 19    term -> term DIVIDEINT term
+Rule 20    term -> term QUOTIENT term
+Rule 21    term -> term MINUS term
+Rule 22    term -> term PLUS term
+Rule 23    term -> factor
+Rule 24    factor -> nterm
+Rule 25    factor -> NUMBER
+Rule 26    factor -> positive
+Rule 27    factor -> negative
+Rule 28    negative -> MINUS term
+Rule 29    positive -> PLUS term
+Rule 30    nterm -> LPAR term RPAR
+Rule 31    term -> NAME
+Rule 32    empty -> <empty>
+
+Terminals, with rules where they appear
+
+COMMA                : 7 9
+DEF                  : 8
+DIVIDE               : 18
+DIVIDEINT            : 19
+ENDLINE              : 
+EQUALS               : 15
+EXPONENT             : 16
+LCHAVES              : 14
+LPAR                 : 4 8 30
+MINUS                : 21 28
+MULTIPLY             : 17
+NAME                 : 4 6 7 8 9 10 15 31
+NUMBER               : 5 25
+PLUS                 : 22 29
+QUOTIENT             : 20
+RCHAVES              : 14
+RPAR                 : 4 8 30
+error                : 
+
+Nonterminals, with rules where they appear
+
+args                 : 8 9
+bloco                : 8
+contexto             : 0
+deffuncao            : 1
+empty                : 13
+expression           : 3 14
+factor               : 23
+funcao               : 2
+negative             : 27
+nterm                : 24
+positive             : 26
+term                 : 11 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 28 29 30
+values               : 4 7
+var_assign           : 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . contexto
+    (1) contexto -> . deffuncao
+    (2) contexto -> . funcao
+    (3) contexto -> . expression
+    (8) deffuncao -> . DEF NAME LPAR args RPAR bloco
+    (4) funcao -> . NAME LPAR values RPAR
+    (11) expression -> . term
+    (12) expression -> . var_assign
+    (13) expression -> . empty
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (15) var_assign -> . NAME EQUALS term
+    (32) empty -> .
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    DEF             shift and go to state 5
+    NAME            shift and go to state 6
+    $end            reduce using rule 32 (empty -> .)
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    contexto                       shift and go to state 1
+    deffuncao                      shift and go to state 2
+    funcao                         shift and go to state 3
+    expression                     shift and go to state 4
+    term                           shift and go to state 8
+    var_assign                     shift and go to state 9
+    empty                          shift and go to state 10
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 1
+
+    (0) S' -> contexto .
+
+
+
+state 2
+
+    (1) contexto -> deffuncao .
+
+    $end            reduce using rule 1 (contexto -> deffuncao .)
+
+
+state 3
+
+    (2) contexto -> funcao .
+
+    $end            reduce using rule 2 (contexto -> funcao .)
+
+
+state 4
+
+    (3) contexto -> expression .
+
+    $end            reduce using rule 3 (contexto -> expression .)
+
+
+state 5
+
+    (8) deffuncao -> DEF . NAME LPAR args RPAR bloco
+
+    NAME            shift and go to state 18
+
+
+state 6
+
+    (4) funcao -> NAME . LPAR values RPAR
+    (31) term -> NAME .
+    (15) var_assign -> NAME . EQUALS term
+
+    LPAR            shift and go to state 19
+    EXPONENT        reduce using rule 31 (term -> NAME .)
+    MULTIPLY        reduce using rule 31 (term -> NAME .)
+    DIVIDE          reduce using rule 31 (term -> NAME .)
+    DIVIDEINT       reduce using rule 31 (term -> NAME .)
+    QUOTIENT        reduce using rule 31 (term -> NAME .)
+    MINUS           reduce using rule 31 (term -> NAME .)
+    PLUS            reduce using rule 31 (term -> NAME .)
+    $end            reduce using rule 31 (term -> NAME .)
+    EQUALS          shift and go to state 20
+
+
+state 7
+
+    (30) nterm -> LPAR . term RPAR
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 21
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 8
+
+    (11) expression -> term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    $end            reduce using rule 11 (expression -> term .)
+    RCHAVES         reduce using rule 11 (expression -> term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+    MINUS           shift and go to state 28
+    PLUS            shift and go to state 29
+
+
+state 9
+
+    (12) expression -> var_assign .
+
+    $end            reduce using rule 12 (expression -> var_assign .)
+    RCHAVES         reduce using rule 12 (expression -> var_assign .)
+
+
+state 10
+
+    (13) expression -> empty .
+
+    $end            reduce using rule 13 (expression -> empty .)
+    RCHAVES         reduce using rule 13 (expression -> empty .)
+
+
+state 11
+
+    (28) negative -> MINUS . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 30
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 12
+
+    (29) positive -> PLUS . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 31
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 13
+
+    (23) term -> factor .
+
+    EXPONENT        reduce using rule 23 (term -> factor .)
+    MULTIPLY        reduce using rule 23 (term -> factor .)
+    DIVIDE          reduce using rule 23 (term -> factor .)
+    DIVIDEINT       reduce using rule 23 (term -> factor .)
+    QUOTIENT        reduce using rule 23 (term -> factor .)
+    MINUS           reduce using rule 23 (term -> factor .)
+    PLUS            reduce using rule 23 (term -> factor .)
+    $end            reduce using rule 23 (term -> factor .)
+    RPAR            reduce using rule 23 (term -> factor .)
+    RCHAVES         reduce using rule 23 (term -> factor .)
+
+
+state 14
+
+    (24) factor -> nterm .
+
+    EXPONENT        reduce using rule 24 (factor -> nterm .)
+    MULTIPLY        reduce using rule 24 (factor -> nterm .)
+    DIVIDE          reduce using rule 24 (factor -> nterm .)
+    DIVIDEINT       reduce using rule 24 (factor -> nterm .)
+    QUOTIENT        reduce using rule 24 (factor -> nterm .)
+    MINUS           reduce using rule 24 (factor -> nterm .)
+    PLUS            reduce using rule 24 (factor -> nterm .)
+    $end            reduce using rule 24 (factor -> nterm .)
+    RPAR            reduce using rule 24 (factor -> nterm .)
+    RCHAVES         reduce using rule 24 (factor -> nterm .)
+
+
+state 15
+
+    (25) factor -> NUMBER .
+
+    EXPONENT        reduce using rule 25 (factor -> NUMBER .)
+    MULTIPLY        reduce using rule 25 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 25 (factor -> NUMBER .)
+    DIVIDEINT       reduce using rule 25 (factor -> NUMBER .)
+    QUOTIENT        reduce using rule 25 (factor -> NUMBER .)
+    MINUS           reduce using rule 25 (factor -> NUMBER .)
+    PLUS            reduce using rule 25 (factor -> NUMBER .)
+    $end            reduce using rule 25 (factor -> NUMBER .)
+    RPAR            reduce using rule 25 (factor -> NUMBER .)
+    RCHAVES         reduce using rule 25 (factor -> NUMBER .)
+
+
+state 16
+
+    (26) factor -> positive .
+
+    EXPONENT        reduce using rule 26 (factor -> positive .)
+    MULTIPLY        reduce using rule 26 (factor -> positive .)
+    DIVIDE          reduce using rule 26 (factor -> positive .)
+    DIVIDEINT       reduce using rule 26 (factor -> positive .)
+    QUOTIENT        reduce using rule 26 (factor -> positive .)
+    MINUS           reduce using rule 26 (factor -> positive .)
+    PLUS            reduce using rule 26 (factor -> positive .)
+    $end            reduce using rule 26 (factor -> positive .)
+    RPAR            reduce using rule 26 (factor -> positive .)
+    RCHAVES         reduce using rule 26 (factor -> positive .)
+
+
+state 17
+
+    (27) factor -> negative .
+
+    EXPONENT        reduce using rule 27 (factor -> negative .)
+    MULTIPLY        reduce using rule 27 (factor -> negative .)
+    DIVIDE          reduce using rule 27 (factor -> negative .)
+    DIVIDEINT       reduce using rule 27 (factor -> negative .)
+    QUOTIENT        reduce using rule 27 (factor -> negative .)
+    MINUS           reduce using rule 27 (factor -> negative .)
+    PLUS            reduce using rule 27 (factor -> negative .)
+    $end            reduce using rule 27 (factor -> negative .)
+    RPAR            reduce using rule 27 (factor -> negative .)
+    RCHAVES         reduce using rule 27 (factor -> negative .)
+
+
+state 18
+
+    (8) deffuncao -> DEF NAME . LPAR args RPAR bloco
+
+    LPAR            shift and go to state 32
+
+
+state 19
+
+    (4) funcao -> NAME LPAR . values RPAR
+    (5) values -> . NUMBER
+    (6) values -> . NAME
+    (7) values -> . NAME COMMA values
+
+    NUMBER          shift and go to state 35
+    NAME            shift and go to state 33
+
+    values                         shift and go to state 34
+
+state 20
+
+    (15) var_assign -> NAME EQUALS . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 36
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 21
+
+    (30) nterm -> LPAR term . RPAR
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    RPAR            shift and go to state 37
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+    MINUS           shift and go to state 28
+    PLUS            shift and go to state 29
+
+
+state 22
+
+    (31) term -> NAME .
+
+    RPAR            reduce using rule 31 (term -> NAME .)
+    EXPONENT        reduce using rule 31 (term -> NAME .)
+    MULTIPLY        reduce using rule 31 (term -> NAME .)
+    DIVIDE          reduce using rule 31 (term -> NAME .)
+    DIVIDEINT       reduce using rule 31 (term -> NAME .)
+    QUOTIENT        reduce using rule 31 (term -> NAME .)
+    MINUS           reduce using rule 31 (term -> NAME .)
+    PLUS            reduce using rule 31 (term -> NAME .)
+    $end            reduce using rule 31 (term -> NAME .)
+    RCHAVES         reduce using rule 31 (term -> NAME .)
+
+
+state 23
+
+    (16) term -> term EXPONENT . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 38
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 24
+
+    (17) term -> term MULTIPLY . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 39
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 25
+
+    (18) term -> term DIVIDE . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 40
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 26
+
+    (19) term -> term DIVIDEINT . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 41
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 27
+
+    (20) term -> term QUOTIENT . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 42
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 28
+
+    (21) term -> term MINUS . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 43
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 29
+
+    (22) term -> term PLUS . term
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 22
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    term                           shift and go to state 44
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 30
+
+    (28) negative -> MINUS term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MINUS           reduce using rule 28 (negative -> MINUS term .)
+    PLUS            reduce using rule 28 (negative -> MINUS term .)
+    $end            reduce using rule 28 (negative -> MINUS term .)
+    RPAR            reduce using rule 28 (negative -> MINUS term .)
+    RCHAVES         reduce using rule 28 (negative -> MINUS term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+
+  ! EXPONENT        [ reduce using rule 28 (negative -> MINUS term .) ]
+  ! MULTIPLY        [ reduce using rule 28 (negative -> MINUS term .) ]
+  ! DIVIDE          [ reduce using rule 28 (negative -> MINUS term .) ]
+  ! DIVIDEINT       [ reduce using rule 28 (negative -> MINUS term .) ]
+  ! QUOTIENT        [ reduce using rule 28 (negative -> MINUS term .) ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 31
+
+    (29) positive -> PLUS term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MINUS           reduce using rule 29 (positive -> PLUS term .)
+    PLUS            reduce using rule 29 (positive -> PLUS term .)
+    $end            reduce using rule 29 (positive -> PLUS term .)
+    RPAR            reduce using rule 29 (positive -> PLUS term .)
+    RCHAVES         reduce using rule 29 (positive -> PLUS term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+
+  ! EXPONENT        [ reduce using rule 29 (positive -> PLUS term .) ]
+  ! MULTIPLY        [ reduce using rule 29 (positive -> PLUS term .) ]
+  ! DIVIDE          [ reduce using rule 29 (positive -> PLUS term .) ]
+  ! DIVIDEINT       [ reduce using rule 29 (positive -> PLUS term .) ]
+  ! QUOTIENT        [ reduce using rule 29 (positive -> PLUS term .) ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 32
+
+    (8) deffuncao -> DEF NAME LPAR . args RPAR bloco
+    (9) args -> . NAME COMMA args
+    (10) args -> . NAME
+
+    NAME            shift and go to state 45
+
+    args                           shift and go to state 46
+
+state 33
+
+    (6) values -> NAME .
+    (7) values -> NAME . COMMA values
+
+    RPAR            reduce using rule 6 (values -> NAME .)
+    COMMA           shift and go to state 47
+
+
+state 34
+
+    (4) funcao -> NAME LPAR values . RPAR
+
+    RPAR            shift and go to state 48
+
+
+state 35
+
+    (5) values -> NUMBER .
+
+    RPAR            reduce using rule 5 (values -> NUMBER .)
+
+
+state 36
+
+    (15) var_assign -> NAME EQUALS term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    $end            reduce using rule 15 (var_assign -> NAME EQUALS term .)
+    RCHAVES         reduce using rule 15 (var_assign -> NAME EQUALS term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+    MINUS           shift and go to state 28
+    PLUS            shift and go to state 29
+
+
+state 37
+
+    (30) nterm -> LPAR term RPAR .
+
+    EXPONENT        reduce using rule 30 (nterm -> LPAR term RPAR .)
+    MULTIPLY        reduce using rule 30 (nterm -> LPAR term RPAR .)
+    DIVIDE          reduce using rule 30 (nterm -> LPAR term RPAR .)
+    DIVIDEINT       reduce using rule 30 (nterm -> LPAR term RPAR .)
+    QUOTIENT        reduce using rule 30 (nterm -> LPAR term RPAR .)
+    MINUS           reduce using rule 30 (nterm -> LPAR term RPAR .)
+    PLUS            reduce using rule 30 (nterm -> LPAR term RPAR .)
+    $end            reduce using rule 30 (nterm -> LPAR term RPAR .)
+    RPAR            reduce using rule 30 (nterm -> LPAR term RPAR .)
+    RCHAVES         reduce using rule 30 (nterm -> LPAR term RPAR .)
+
+
+state 38
+
+    (16) term -> term EXPONENT term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    EXPONENT        reduce using rule 16 (term -> term EXPONENT term .)
+    MULTIPLY        reduce using rule 16 (term -> term EXPONENT term .)
+    DIVIDE          reduce using rule 16 (term -> term EXPONENT term .)
+    DIVIDEINT       reduce using rule 16 (term -> term EXPONENT term .)
+    QUOTIENT        reduce using rule 16 (term -> term EXPONENT term .)
+    MINUS           reduce using rule 16 (term -> term EXPONENT term .)
+    PLUS            reduce using rule 16 (term -> term EXPONENT term .)
+    $end            reduce using rule 16 (term -> term EXPONENT term .)
+    RPAR            reduce using rule 16 (term -> term EXPONENT term .)
+    RCHAVES         reduce using rule 16 (term -> term EXPONENT term .)
+
+  ! EXPONENT        [ shift and go to state 23 ]
+  ! MULTIPLY        [ shift and go to state 24 ]
+  ! DIVIDE          [ shift and go to state 25 ]
+  ! DIVIDEINT       [ shift and go to state 26 ]
+  ! QUOTIENT        [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 39
+
+    (17) term -> term MULTIPLY term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MULTIPLY        reduce using rule 17 (term -> term MULTIPLY term .)
+    DIVIDE          reduce using rule 17 (term -> term MULTIPLY term .)
+    DIVIDEINT       reduce using rule 17 (term -> term MULTIPLY term .)
+    QUOTIENT        reduce using rule 17 (term -> term MULTIPLY term .)
+    MINUS           reduce using rule 17 (term -> term MULTIPLY term .)
+    PLUS            reduce using rule 17 (term -> term MULTIPLY term .)
+    $end            reduce using rule 17 (term -> term MULTIPLY term .)
+    RPAR            reduce using rule 17 (term -> term MULTIPLY term .)
+    RCHAVES         reduce using rule 17 (term -> term MULTIPLY term .)
+    EXPONENT        shift and go to state 23
+
+  ! EXPONENT        [ reduce using rule 17 (term -> term MULTIPLY term .) ]
+  ! MULTIPLY        [ shift and go to state 24 ]
+  ! DIVIDE          [ shift and go to state 25 ]
+  ! DIVIDEINT       [ shift and go to state 26 ]
+  ! QUOTIENT        [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 40
+
+    (18) term -> term DIVIDE term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MULTIPLY        reduce using rule 18 (term -> term DIVIDE term .)
+    DIVIDE          reduce using rule 18 (term -> term DIVIDE term .)
+    DIVIDEINT       reduce using rule 18 (term -> term DIVIDE term .)
+    QUOTIENT        reduce using rule 18 (term -> term DIVIDE term .)
+    MINUS           reduce using rule 18 (term -> term DIVIDE term .)
+    PLUS            reduce using rule 18 (term -> term DIVIDE term .)
+    $end            reduce using rule 18 (term -> term DIVIDE term .)
+    RPAR            reduce using rule 18 (term -> term DIVIDE term .)
+    RCHAVES         reduce using rule 18 (term -> term DIVIDE term .)
+    EXPONENT        shift and go to state 23
+
+  ! EXPONENT        [ reduce using rule 18 (term -> term DIVIDE term .) ]
+  ! MULTIPLY        [ shift and go to state 24 ]
+  ! DIVIDE          [ shift and go to state 25 ]
+  ! DIVIDEINT       [ shift and go to state 26 ]
+  ! QUOTIENT        [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 41
+
+    (19) term -> term DIVIDEINT term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    DIVIDEINT       reduce using rule 19 (term -> term DIVIDEINT term .)
+    QUOTIENT        reduce using rule 19 (term -> term DIVIDEINT term .)
+    MINUS           reduce using rule 19 (term -> term DIVIDEINT term .)
+    PLUS            reduce using rule 19 (term -> term DIVIDEINT term .)
+    $end            reduce using rule 19 (term -> term DIVIDEINT term .)
+    RPAR            reduce using rule 19 (term -> term DIVIDEINT term .)
+    RCHAVES         reduce using rule 19 (term -> term DIVIDEINT term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+
+  ! EXPONENT        [ reduce using rule 19 (term -> term DIVIDEINT term .) ]
+  ! MULTIPLY        [ reduce using rule 19 (term -> term DIVIDEINT term .) ]
+  ! DIVIDE          [ reduce using rule 19 (term -> term DIVIDEINT term .) ]
+  ! DIVIDEINT       [ shift and go to state 26 ]
+  ! QUOTIENT        [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 42
+
+    (20) term -> term QUOTIENT term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    DIVIDEINT       reduce using rule 20 (term -> term QUOTIENT term .)
+    QUOTIENT        reduce using rule 20 (term -> term QUOTIENT term .)
+    MINUS           reduce using rule 20 (term -> term QUOTIENT term .)
+    PLUS            reduce using rule 20 (term -> term QUOTIENT term .)
+    $end            reduce using rule 20 (term -> term QUOTIENT term .)
+    RPAR            reduce using rule 20 (term -> term QUOTIENT term .)
+    RCHAVES         reduce using rule 20 (term -> term QUOTIENT term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+
+  ! EXPONENT        [ reduce using rule 20 (term -> term QUOTIENT term .) ]
+  ! MULTIPLY        [ reduce using rule 20 (term -> term QUOTIENT term .) ]
+  ! DIVIDE          [ reduce using rule 20 (term -> term QUOTIENT term .) ]
+  ! DIVIDEINT       [ shift and go to state 26 ]
+  ! QUOTIENT        [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 43
+
+    (21) term -> term MINUS term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MINUS           reduce using rule 21 (term -> term MINUS term .)
+    PLUS            reduce using rule 21 (term -> term MINUS term .)
+    $end            reduce using rule 21 (term -> term MINUS term .)
+    RPAR            reduce using rule 21 (term -> term MINUS term .)
+    RCHAVES         reduce using rule 21 (term -> term MINUS term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+
+  ! EXPONENT        [ reduce using rule 21 (term -> term MINUS term .) ]
+  ! MULTIPLY        [ reduce using rule 21 (term -> term MINUS term .) ]
+  ! DIVIDE          [ reduce using rule 21 (term -> term MINUS term .) ]
+  ! DIVIDEINT       [ reduce using rule 21 (term -> term MINUS term .) ]
+  ! QUOTIENT        [ reduce using rule 21 (term -> term MINUS term .) ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 44
+
+    (22) term -> term PLUS term .
+    (16) term -> term . EXPONENT term
+    (17) term -> term . MULTIPLY term
+    (18) term -> term . DIVIDE term
+    (19) term -> term . DIVIDEINT term
+    (20) term -> term . QUOTIENT term
+    (21) term -> term . MINUS term
+    (22) term -> term . PLUS term
+
+    MINUS           reduce using rule 22 (term -> term PLUS term .)
+    PLUS            reduce using rule 22 (term -> term PLUS term .)
+    $end            reduce using rule 22 (term -> term PLUS term .)
+    RPAR            reduce using rule 22 (term -> term PLUS term .)
+    RCHAVES         reduce using rule 22 (term -> term PLUS term .)
+    EXPONENT        shift and go to state 23
+    MULTIPLY        shift and go to state 24
+    DIVIDE          shift and go to state 25
+    DIVIDEINT       shift and go to state 26
+    QUOTIENT        shift and go to state 27
+
+  ! EXPONENT        [ reduce using rule 22 (term -> term PLUS term .) ]
+  ! MULTIPLY        [ reduce using rule 22 (term -> term PLUS term .) ]
+  ! DIVIDE          [ reduce using rule 22 (term -> term PLUS term .) ]
+  ! DIVIDEINT       [ reduce using rule 22 (term -> term PLUS term .) ]
+  ! QUOTIENT        [ reduce using rule 22 (term -> term PLUS term .) ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! PLUS            [ shift and go to state 29 ]
+
+
+state 45
+
+    (9) args -> NAME . COMMA args
+    (10) args -> NAME .
+
+    COMMA           shift and go to state 49
+    RPAR            reduce using rule 10 (args -> NAME .)
+
+
+state 46
+
+    (8) deffuncao -> DEF NAME LPAR args . RPAR bloco
+
+    RPAR            shift and go to state 50
+
+
+state 47
+
+    (7) values -> NAME COMMA . values
+    (5) values -> . NUMBER
+    (6) values -> . NAME
+    (7) values -> . NAME COMMA values
+
+    NUMBER          shift and go to state 35
+    NAME            shift and go to state 33
+
+    values                         shift and go to state 51
+
+state 48
+
+    (4) funcao -> NAME LPAR values RPAR .
+
+    $end            reduce using rule 4 (funcao -> NAME LPAR values RPAR .)
+
+
+state 49
+
+    (9) args -> NAME COMMA . args
+    (9) args -> . NAME COMMA args
+    (10) args -> . NAME
+
+    NAME            shift and go to state 45
+
+    args                           shift and go to state 52
+
+state 50
+
+    (8) deffuncao -> DEF NAME LPAR args RPAR . bloco
+    (14) bloco -> . LCHAVES expression RCHAVES
+
+    LCHAVES         shift and go to state 54
+
+    bloco                          shift and go to state 53
+
+state 51
+
+    (7) values -> NAME COMMA values .
+
+    RPAR            reduce using rule 7 (values -> NAME COMMA values .)
+
+
+state 52
+
+    (9) args -> NAME COMMA args .
+
+    RPAR            reduce using rule 9 (args -> NAME COMMA args .)
+
+
+state 53
+
+    (8) deffuncao -> DEF NAME LPAR args RPAR bloco .
+
+    $end            reduce using rule 8 (deffuncao -> DEF NAME LPAR args RPAR bloco .)
+
+
+state 54
+
+    (14) bloco -> LCHAVES . expression RCHAVES
+    (11) expression -> . term
+    (12) expression -> . var_assign
+    (13) expression -> . empty
+    (16) term -> . term EXPONENT term
+    (17) term -> . term MULTIPLY term
+    (18) term -> . term DIVIDE term
+    (19) term -> . term DIVIDEINT term
+    (20) term -> . term QUOTIENT term
+    (21) term -> . term MINUS term
+    (22) term -> . term PLUS term
+    (23) term -> . factor
+    (31) term -> . NAME
+    (15) var_assign -> . NAME EQUALS term
+    (32) empty -> .
+    (24) factor -> . nterm
+    (25) factor -> . NUMBER
+    (26) factor -> . positive
+    (27) factor -> . negative
+    (30) nterm -> . LPAR term RPAR
+    (29) positive -> . PLUS term
+    (28) negative -> . MINUS term
+
+    NAME            shift and go to state 56
+    RCHAVES         reduce using rule 32 (empty -> .)
+    NUMBER          shift and go to state 15
+    LPAR            shift and go to state 7
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 11
+
+    expression                     shift and go to state 55
+    term                           shift and go to state 8
+    var_assign                     shift and go to state 9
+    empty                          shift and go to state 10
+    factor                         shift and go to state 13
+    nterm                          shift and go to state 14
+    positive                       shift and go to state 16
+    negative                       shift and go to state 17
+
+state 55
+
+    (14) bloco -> LCHAVES expression . RCHAVES
+
+    RCHAVES         shift and go to state 57
+
+
+state 56
+
+    (31) term -> NAME .
+    (15) var_assign -> NAME . EQUALS term
+
+    EXPONENT        reduce using rule 31 (term -> NAME .)
+    MULTIPLY        reduce using rule 31 (term -> NAME .)
+    DIVIDE          reduce using rule 31 (term -> NAME .)
+    DIVIDEINT       reduce using rule 31 (term -> NAME .)
+    QUOTIENT        reduce using rule 31 (term -> NAME .)
+    MINUS           reduce using rule 31 (term -> NAME .)
+    PLUS            reduce using rule 31 (term -> NAME .)
+    RCHAVES         reduce using rule 31 (term -> NAME .)
+    EQUALS          shift and go to state 20
+
+
+state 57
+
+    (14) bloco -> LCHAVES expression RCHAVES .
+
+    $end            reduce using rule 14 (bloco -> LCHAVES expression RCHAVES .)
+

@@ -29,7 +29,14 @@ tokens = [
     'RCHAVES',
     'COMMA',
     'ENDLINE',
-    'DEF'
+    'DEF',
+    'IF',
+    'WHILE',
+    'IGUAL',
+    'MENOR',
+    'MAIOR',
+    'MENORIGUAL',
+    'MAIORIGUAL'
 ]
 
 # Definindo os tokens onde tokens = conjunto
@@ -46,9 +53,13 @@ t_LPAR = r'\('
 t_RPAR = r'\)'
 t_LCHAVES = r'\{'
 t_RCHAVES = r'\}'
-#t_DEF = r'def'
 t_COMMA = r'\,'
 t_ENDLINE = r'\;'
+t_IGUAL = r'\=\='
+t_MENOR = r'\<'
+t_MAIOR = r'\>'
+t_MENORIGUAL = r'\<\='
+t_MAIORIGUAL = r'\>\='
 
 # Ignorando espacos em branco
 t_ignore = r' '
@@ -64,6 +75,18 @@ def t_DEF(tokens):
     r'def'
     tokens.type = 'DEF'
     return tokens
+
+def t_IF(tokens):
+    r'if'
+    tokens.type = 'IF'
+    return tokens
+    
+
+def t_WHILE(tokens):
+    r'while'
+    tokens.type = 'WHILE'
+    return tokens
+
 
 
 # Definindo name para variaveis, exige uma letra e pode ser seguido por letras ou numeros 
@@ -83,6 +106,7 @@ contexto = ''
 
 # Definindo as precedencias
 precedence = (
+    ('left','IGUAL','MENOR','MAIOR','MENORIGUAL','MAIORIGUAL'),
     ('left','PLUS','MINUS'),
     ('left','DIVIDEINT','QUOTIENT'),
     ('left','MULTIPLY','DIVIDE'),
@@ -94,11 +118,19 @@ precedence = (
 def p_contexto(entrada):
     '''
     contexto    : deffuncao
-                | funcao
-                | expression
+                | bloco
     '''
     print(run(entrada[1]))
 
+def p_bloco(entrada):
+    '''
+    bloco   : funcao
+            | if
+            | while
+            | var_assign
+            | expression
+    '''
+    entrada[0] = entrada[1]
 
 def p_funcao(entrada):
     '''
@@ -127,9 +159,9 @@ def p_values(entrada):
 
 def p_deffuncao(entrada):
     '''
-    deffuncao   : DEF NAME LPAR args RPAR bloco
+    deffuncao   : DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES
     '''
-    entrada[0] = ('def', entrada[2],entrada[4],entrada[6])
+    entrada[0] = ('def', entrada[2],entrada[4],entrada[7])
 
 
 def p_args(entrada):
@@ -148,18 +180,25 @@ def p_args_arg(entrada):
 def p_expression(entrada):
     '''
     expression  : term
-                | var_assign
                 | empty
     '''
     entrada[0] = entrada[1]
     
 
-def p_bloco(entrada):
-    '''
-    bloco   : LCHAVES expression RCHAVES
-    '''
-    entrada[0] = entrada[2]
 
+def p_if(entrada):
+    '''
+    if  : IF LPAR bloco RPAR LCHAVES bloco RCHAVES
+    '''
+    print("entrou if")
+    entrada[0] = ('if',entrada[3],entrada[6])
+
+def p_while(entrada):
+    '''
+    while   : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
+    '''
+    print("entrou while")
+    entrada[0] = ('while',entrada[3],entrada[6])
 
 #def p_linha(entrada):
 #    '''
@@ -184,6 +223,11 @@ def p_term(entrada):
             | term QUOTIENT term
             | term MINUS term
             | term PLUS term
+            | term IGUAL term
+            | term MENOR term
+            | term MAIOR term
+            | term MENORIGUAL term
+            | term MAIORIGUAL term
     '''
     entrada[0] = (entrada[2], entrada[1], entrada[3])
 
@@ -267,6 +311,26 @@ def run(entrada):
                 env[entrada[1]] = run(entrada[2])
             else:
                 env[contexto+entrada[1]] = run(entrada[2])
+        elif entrada[0] == '==':
+            return run(entrada[1]) == run(entrada[2])
+        elif entrada[0] == '>':
+            return run(entrada[1]) > run(entrada[2])
+        elif entrada[0] == '>=':
+            return run(entrada[1]) >= run(entrada[2])
+        elif entrada[0] == '<':
+            return run(entrada[1]) < run(entrada[2])
+        elif entrada[0] == '<=':
+            return run(entrada[1]) <= run(entrada[2])
+        elif entrada[0] == 'if':
+            if (run(entrada[1])):
+                print ('executa if')
+                return run(entrada[2])
+            else:
+                print ('não executa if')
+        elif entrada[0] == 'while':
+            while (run(entrada[1])):
+                print ('executa bloco enquanto ...')
+                run(entrada[2])
         elif entrada[0] == 'var':
             if entrada[1] in env:
                 return env[entrada[1]]

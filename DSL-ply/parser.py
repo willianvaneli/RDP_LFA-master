@@ -139,21 +139,29 @@ def p_funcao(entrada):
     entrada[0]= ('func',entrada[1],entrada[3])
     
 
-def p_values_value(entrada):
+def p_values_value_name(entrada):
     '''
     values  : NAME COMMA values
-            | NUMBER COMMA values
+    '''
+    entrada[0]= ('values',('var',entrada[1]),entrada[3])
+
+def p_values_value_number(entrada):
+    '''
+    values  : NUMBER COMMA values
     '''
     entrada[0]= ('values',entrada[1],entrada[3])
 
-
-def p_values(entrada):
+def p_values_number(entrada):
     '''
     values  : NUMBER
-            | NAME
     '''
     entrada[0]= ('value',entrada[1])
 
+def p_values_name(entrada):
+    '''
+    values  : NAME
+    '''
+    entrada[0]= ('value',('var',entrada[1]))
 
 
 
@@ -332,10 +340,10 @@ def run(entrada):
                 print ('executa bloco enquanto ...')
                 run(entrada[2])
         elif entrada[0] == 'var':
-            if entrada[1] in env:
-                return env[entrada[1]]
-            elif contexto+entrada[1] in env:
+            if contexto+entrada[1] in env:
                 return env[contexto+entrada[1]]
+            elif entrada[1] in env:
+                return env[entrada[1]]
             else:
                 return 'Undeclared variable found!'
         elif entrada[0] == 'def':
@@ -356,11 +364,13 @@ def run(entrada):
             contexto = entrada[1]
             run(entrada[2])
             rodaFuncao("func"+contexto)
+            env["func"+contexto][2]=[]
+            limpaVarFun("func"+contexto)
             contexto=''
         elif entrada[0] == 'value':
-            env['func'+contexto][2].append(entrada[1])
+            env['func'+contexto][2].append(run(entrada[1]))
         elif entrada[0] == 'values':
-            env['func'+contexto][2].append(entrada[1])
+            env['func'+contexto][2].append(run(entrada[1]))
             run(entrada[2])
     else:
         return entrada
@@ -380,7 +390,13 @@ def rodaFuncao (fun):
     return 0
 
 
-
+def limpaVarFun(fun):
+    i = 0
+    #lst = []
+    while (i < len(env[fun][0])) :
+        env.pop(contexto+env[fun][0][i])
+        i+=1
+    return 0
 
 while True:
     s = input('>> ')

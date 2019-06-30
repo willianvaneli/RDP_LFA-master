@@ -218,6 +218,7 @@ def p_while(entrada):
 def p_var_assign(entrada):
     '''
     var_assign  : NAME EQUALS term
+                | NAME EQUALS funcao
     '''
     entrada[0] = ('=', entrada[1],entrada[3])
 
@@ -317,8 +318,10 @@ def run(entrada):
         elif entrada[0] == '=':
             if (contexto == ''):
                 env[entrada[1]] = run(entrada[2])
+                return entrada[2]
             else:
                 env[contexto+entrada[1]] = run(entrada[2])
+                return entrada[2]
         elif entrada[0] == '==':
             return run(entrada[1]) == run(entrada[2])
         elif entrada[0] == '>':
@@ -337,8 +340,7 @@ def run(entrada):
                 print ('não executa if')
         elif entrada[0] == 'while':
             while (run(entrada[1])):
-                print ('executa bloco enquanto ...')
-                run(entrada[2])
+                resultado = run(entrada[2])
         elif entrada[0] == 'var':
             if contexto+entrada[1] in env:
                 return env[contexto+entrada[1]]
@@ -363,10 +365,11 @@ def run(entrada):
         elif entrada[0] == 'func':
             contexto = entrada[1]
             run(entrada[2])
-            rodaFuncao("func"+contexto)
+            resultado = rodaFuncao("func"+contexto)
             env["func"+contexto][2]=[]
             limpaVarFun("func"+contexto)
             contexto=''
+            return resultado
         elif entrada[0] == 'value':
             env['func'+contexto][2].append(run(entrada[1]))
         elif entrada[0] == 'values':
@@ -383,11 +386,11 @@ def rodaFuncao (fun):
         i = 0
         while (i < len(env[fun][2])) :
             env[contexto+env[fun][0][i]] = env[fun][2][i]          
-            print(str(contexto+env[fun][0][i]) + " com o  valor " + str(env[fun][2][i]))
+            #print(str(contexto+env[fun][0][i]) + " com o  valor " + str(env[fun][2][i]))
             i+=1
-        print ( run(env[fun][1][0]) )
+        #print ( run(env[fun][1][0]) )
     
-    return 0
+    return run(env[fun][1][0])
 
 
 def limpaVarFun(fun):

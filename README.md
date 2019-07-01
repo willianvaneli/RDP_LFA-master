@@ -10,14 +10,15 @@
 #### Ambiente de desenvolvimento:
 - Programa desenvolvido em Python (3.6.7) 
 - Biblioteca [Ply](https://www.dabeaz.com/ply/)
-- Visual studio code, SO windowns.
+- Visual studio code
+- Windows
 
 ### Descrição da linguagem:
-A DSL proposta neste trabalho tem como objetivo prover uma linguagem que permita realizar operações matemáticas aritméticos. Optamos por utilizar a linguagem Python para o desenvolvimento, pela simplicidade de criação de artefatos em geral.
-A linguagem permite utilizar artefatos de nomeação de variáveis, além de construção de comandos de seleção IF e repetição WHILE. Permitindo também artefatos de abstração conhecidos como função ou procedimento, geralmente utilizados nas diversas outras linguagens de programação. 
+A DSL proposta neste trabalho tem como objetivo prover uma linguagem que permita realizar operações matemáticas aritméticas. Optamos por utilizar a linguagem Python para o desenvolvimento pela facilidade que os integrantes do grupo possuem com a mesma.
+A linguagem permite utilizar artefatos de nomeação de variáveis, além de construção de comandos de seleção IF e repetição WHILE. Permitindo também artefatos de abstração conhecidos como função ou procedimento, utilizados nas diversas outras linguagens de programação. 
 
 ### Justificativa uso da biblioteca Ply:
-A biblioteca ply apresenta facilidade de declaração dos tokens e EBNF, onde é possível separar cada declaração e trata-la de modo exclusivo.
+A biblioteca Ply apresenta facilidade de declaração dos tokens e EBNF, onde é possível separar cada declaração e trata-la de modo exclusivo.
 
 
 ### Tabela com Operadores e Expressões:
@@ -26,7 +27,7 @@ Operador | Descrição
 --------- | ------
 =              | Atribuição. Ex.: <variável> = <conteúdo>;
 ==,>,<,>=,<=   | Comparadores lógicos
-{ }            | Delimitadores de bloco, podem ser usados em IF,While, declaração de função ou em chamada de função;
+{ }            | Delimitadores de bloco, podem ser usados em IF, While, declaração de função ou em chamada de função;
 +,-,*,/,^,//,% | Operadores aritiméticos;
     
     
@@ -36,104 +37,94 @@ def         | Expressão que define uma função. Ex.: def <nome-do-método>(<ar
 if          | Expressão que indica uma estrutura de seleção. Ex.: if (<condição>){<bloco>};
 while       | Expressão que indica um loop. Ex.: while (<condição>){<operações>*};
 
-###Estrutura da aplicação
-trabalho-final-lfa
-|_ Readme.md
-|_ relatório.pdf
+### Estrutura da aplicação
+
+```
+trabalho-final-lfa-DHM
 |_ DSL-ply
-  |_ _pycache_
-    |_parsetab.cpython-36
-    |_parsetab.cpython-37
-  |_ ply *pasta da biblioteca ply*
+  |_ ply (pasta da biblioteca ply)
   |_parser.out
   |_parser.py
   |_parsertab.py
-|_ teste
-  |_ *arquivos de teste*.txt
+|_ Testes
+  |_ 
+|_ Readme.md
+|_ relatório.pdf
+```
 
 ### Descrição dos arquivos:
 
 Arquivo | Descrição
 --------- | ------
-parser.py     | Arquivo contendo a gramática em EBNF da linguagem e demais funções desenvolvidas em python. 
-pasrsertab.py    | ....
+[parser.py](DSL-ply/parser.py)    | Arquivo contendo a gramática em EBNF da linguagem e demais funções desenvolvidas em python. 
+[pasrsetab.py](DSL-ply/parsetab.py)    | Arquivo gerado automaticamente pelo Ply contendo informações de execução do parser.
+[parser.out](DSL-ply/parser.out) | Arquivo gerado pelo Ply contendo informações sobre a gramática e os estados do parser.
 
 ### Gramática
 Gramática em EBNF
 
 ````
-precedence = (
-    ('left','IGUAL','MENOR','MAIOR','MENORIGUAL','MAIORIGUAL'),
-    ('left','PLUS','MINUS'),
-    ('left','DIVIDEINT','QUOTIENT'),
-    ('left','MULTIPLY','DIVIDE'),
-    ('left','EXPONENT'),
-    ('left','LPAR','RPAR'),
-    ('left','LCHAVES','RCHAVES')
-)
-
-
     '''
     contexto    : deffuncao
                 | bloco
                 | empty
     '''
-    bloco   : linha [ENDLINE bloco]*
+    bloco       : linha [ENDLINE bloco]*
     '''
-    linha   : funcao
-            | if
-            | while
-            | return
-            | var_assign
-            | expression
+    linha       : funcao
+                | if
+                | while
+                | return
+                | var_assign
+                | expression
     '''
-    return  : RETURN term [COMMA return]*
+    return      : RETURN term [COMMA return]*
     '''
-    funcao  : NAME LPAR values RPAR
+    funcao      : NAME LPAR values RPAR
     '''
-    values  : NAME [COMMA values]*
-            | NUMBER [COMMA values]*
+    values      : NAME [COMMA values]*
+                | NUMBER [COMMA values]*
     '''
     deffuncao   : DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES
     '''
-    args    : NAME [COMMA args]*
+    args        : NAME [COMMA args]*
     '''
     expression  : term
     '''
-    if  : IF LPAR bloco RPAR LCHAVES bloco RCHAVES
+    if          : IF LPAR bloco RPAR LCHAVES bloco RCHAVES
     '''
-    while   : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
+    while       : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
     '''
     var_assign  : NAME EQUALS term
                 | NAME EQUALS funcao
     '''
-    term    : term EXPONENT term
-            | term MULTIPLY term
-            | term DIVIDE term
-            | term DIVIDEINT term
-            | term QUOTIENT term
-            | term MINUS term
-            | term PLUS term
-            | term IGUAL term
-            | term MENOR term
-            | term MAIOR term
-            | term MENORIGUAL term
-            | term MAIORIGUAL term
-      | fator
-      | NAME
+    term        : term EXPONENT term
+                | term MULTIPLY term
+                | term DIVIDE term
+                | term DIVIDEINT term
+                | term QUOTIENT term
+                | term MINUS term
+                | term PLUS term
+                | term IGUAL term
+                | term MENOR term
+                | term MAIOR term
+                | term MENORIGUAL term
+                | term MAIORIGUAL term
+                | fator
+                | NAME
     '''
-    factor  : nterm
-            | NUMBER
-            | positive
-            | negative
+    factor      : nterm
+                | NUMBER
+                | positive
+                | negative
     '''
     negative    : MINUS term
     '''
     positive    : PLUS term
     '''
-    nterm : LPAR term RPAR
+    nterm       : LPAR term RPAR
     '''
-    empty   :
+    empty       :
     '''
 
 ````
@@ -354,41 +345,57 @@ def p_empty(entrada):
 
 #### Para a execução do parser é necessário instalar o python e a biblioteca ply.  
 
-### _Instalando python_.  
+### Instalando python.  
 
-###_Windows_  
+### _Windows_  
 Acessar o site oficial do [python](https://www.python.org/downloads/) realizar o download,  
 Antes de iniciar a instalação selecione a opção de configurar o path, avance e aguarde o fim da instalação.  
 
-###_Linux_  
-_Passo 1 - Pré requisitos_  
+### _Ubuntu_  
+#### _Passo 1 - Pré requisitos_
+
+Execute na linha de comando:
+
+``sudo apt-get install build-essential checkinstall``
+
+``sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev``
+
+#### _Passo 2 - Download do python 3.7_
+
+Execute na linha de comando:
+
+``cd /usr/src``
+
+``sudo wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz``
+
+Agora extraia o pacote com o comando:
+
+``sudo tar xzf Python-3.7.3.tgz``
+
+#### _Passo 3 instale o python_
+
+Execute na linha de comando:
+``cd Python-3.7.3``
+
+``sudo ./configure --enable-optimizations``
+
+``sudo make altinstall``
+
+#### _Passo 4 cheque a instalação do python_  
+
 Execute na linha de comando:  
-sudo apt-get install build-essential checkinstall  
-sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev  
 
-_Passo 2 - Download do python 3.7_  
-Execute na linha de comando:  
-cd /usr/src  
-sudo wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz  
+``python3 --version``
 
-Agora extraia o pacote com o comando:  
-sudo tar xzf Python-3.7.3.tgz  
-
-_Passo 3 instale o python_  
-Execute na linha de comando:  
-cd Python-3.7.3  
-sudo ./configure --enable-optimizations  
-sudo make altinstall  
-
-_Passo 4 cheque a instalação do python_  
-Execute na linha de comando:  
-python3.7 -V  
-
-Caso retorne Python-3.7.3 a instalação foi realizada com sucesso.
+Caso retorne ``Python-3.7.3`` a instalação foi realizada com sucesso.
 
 
 ### _Instalando biblioteca ply_  
 
-Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o conteudo do arquivo compactado e acessar a  
-pasta ply-3.11, onde está localizado o arquivo setup.py, por linha de comando e executar o seguinte comando python setup.py install  
-dependendo do SO pode ser que seja necessário usar python3 setup.py install.
+Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o conteudo do arquivo compactado e acessar a pasta ply-3.11, onde está localizado o arquivo ``setup.py`` por linha de comando e executar o seguinte comando:
+
+``$ python setup.py install``
+
+dependendo do SO pode ser que seja necessário usar
+
+`` $ python3 setup.py install``

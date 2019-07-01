@@ -12,10 +12,6 @@
 - Biblioteca [Ply](https://www.dabeaz.com/ply/)
 - Visual studio code, SO windowns.
 
-### Descrição dos arquivos:
-Parser.py:
-Parsertab.py:
-
 ### Descrição da linguagem:
 A DSL proposta neste trabalho tem como objetivo prover uma linguagem que permita realizar operações matemáticas aritméticos. Optamos por utilizar a linguagem Python para o desenvolvimento, pela simplicidade de criação de artefatos em geral.
 A linguagem permite utilizar artefatos de nomeação de variáveis, além de construção de comandos de seleção IF e repetição WHILE. Permitindo também artefatos de abstração conhecidos como função ou procedimento, geralmente utilizados nas diversas outras linguagens de programação. 

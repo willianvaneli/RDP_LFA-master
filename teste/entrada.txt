@@ -29,5 +29,18 @@ a = 2
 b = 20
 i=0
 while(i<a){ i = i + 1}
+i
+
+if (i == a ){a= a+i;a=a+i}
+a
+
+a = 2
+while(a<6){a=a+1;a=a+1}
+a
+
+a = 2
+b = 10
+def multSe(a,b){if(a<b){while(a<b){a=a+1;a=a+1}};return a}
+a = multSe(a,b)
 
 exit

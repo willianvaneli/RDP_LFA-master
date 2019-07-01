@@ -414,13 +414,15 @@ def run(entrada):
                 contexto=''
                 return None
             if (len(env["func"+contexto][3]) == 1 ):
-                resultado = run(env["func"+contexto][3])
+                resultado = run(env["func"+contexto][3][0])
+                env["func"+contexto][3] = []
                 contexto=''
                 return resultado
             #caso vários resultados
             else:
                 for  i in env["func"+contexto][3] :
                     listaResultados.append(run(i))
+                env["func"+contexto][3] = []
                 contexto=''
                 return listaResultados
         elif entrada[0] == 'value':

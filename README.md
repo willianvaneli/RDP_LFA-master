@@ -1,4 +1,4 @@
-# LFA-DSL
+﻿# LFA-DSL
 
 [Especificações do trabalho](lfa-trab-final-2019-1.pdf)
 
@@ -36,6 +36,20 @@ def         | Expressão que define uma função. Ex.: def <nome-do-método>(<ar
 if          | Expressão que indica uma estrutura de seleção. Ex.: if (<condição>){<bloco>};
 while       | Expressão que indica um loop. Ex.: while (<condição>){<operações>*};
 
+###Estrutura da aplicação
+trabalho-final-lfa
+|_ Readme.md
+|_ relatório.pdf
+|_ DSL-ply
+  |_ _pycache_
+    |_parsetab.cpython-36
+    |_parsetab.cpython-37
+  |_ ply *pasta da biblioteca ply*
+  |_parser.out
+  |_parser.py
+  |_parsertab.py
+|_ teste
+  |_ *arquivos de teste*.txt
 
 ### Descrição dos arquivos:
 

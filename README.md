@@ -8,7 +8,9 @@
 - Willian Bruschi Vaneli (willianvaneli@gmail.com)
 
 #### Ambiente de desenvolvimento:
-Programa desenvolvido em Python (3.6.7), utilizando a biblioteca [Ply](https://www.dabeaz.com/ply/), visual studio code, SO windowns.
+- Programa desenvolvido em Python (3.6.7) 
+- Biblioteca [Ply](https://www.dabeaz.com/ply/)
+- Visual studio code, SO windowns.
 
 ### Descrição dos arquivos:
 Parser.py:

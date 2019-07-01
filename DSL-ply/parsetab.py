@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftIGUALMENORMAIORMENORIGUALMAIORIGUALleftPLUSMINUSleftDIVIDEINTQUOTIENTleftMULTIPLYDIVIDEleftEXPONENTleftLPARRPARleftLCHAVESRCHAVESCOMMA DEF DIVIDE DIVIDEINT ENDLINE EQUALS EXPONENT IF IGUAL LCHAVES LPAR MAIOR MAIORIGUAL MENOR MENORIGUAL MINUS MULTIPLY NAME NUMBER PLUS QUOTIENT RCHAVES RPAR WHILE\n    contexto    : deffuncao\n                | bloco\n    \n    bloco   : funcao\n            | if\n            | while\n            | var_assign\n            | expression\n    \n    funcao  : NAME LPAR values RPAR\n    \n    values  : NAME COMMA values\n    \n    values  : NUMBER COMMA values\n    \n    values  : NUMBER\n    \n    values  : NAME\n    \n    deffuncao   : DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES\n    \n    args    : NAME COMMA args\n    \n    args :   NAME\n    \n    expression  : term\n                | empty\n    \n    if  : IF LPAR bloco RPAR LCHAVES bloco RCHAVES\n    \n    while   : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES\n    \n    var_assign  : NAME EQUALS term\n                | NAME EQUALS funcao\n    \n    term    : term EXPONENT term\n            | term MULTIPLY term\n            | term DIVIDE term\n            | term DIVIDEINT term\n            | term QUOTIENT term\n            | term MINUS term\n            | term PLUS term\n            | term IGUAL term\n            | term MENOR term\n            | term MAIOR term\n            | term MENORIGUAL term\n            | term MAIORIGUAL term\n    \n    term    : factor\n    \n    factor  : nterm\n            | NUMBER\n            | positive\n            | negative\n    \n    negative    : MINUS term\n    \n    positive    : PLUS term\n    \n    nterm : LPAR term RPAR\n    \n    term    : NAME\n    \n    empty   :\n    '
+_lr_signature = 'leftIGUALMENORMAIORMENORIGUALMAIORIGUALleftPLUSMINUSleftDIVIDEINTQUOTIENTleftMULTIPLYDIVIDEleftEXPONENTleftLPARRPARleftLCHAVESRCHAVESCOMMA DEF DIVIDE DIVIDEINT ENDLINE EQUALS EXPONENT IF IGUAL LCHAVES LPAR MAIOR MAIORIGUAL MENOR MENORIGUAL MINUS MULTIPLY NAME NUMBER PLUS QUOTIENT RCHAVES RETURN RPAR WHILE\n    contexto    : deffuncao\n                | bloco\n                | empty\n    \n    bloco   : linha ENDLINE bloco\n    \n    bloco   : linha\n    \n    linha   : funcao\n            | if\n            | while\n            | return\n            | var_assign\n            | expression\n    \n    return  : RETURN term COMMA return\n    \n    return  : RETURN term\n    \n    funcao  : NAME LPAR values RPAR\n    \n    values  : NAME COMMA values\n    \n    values  : NUMBER COMMA values\n    \n    values  : NUMBER\n    \n    values  : NAME\n    \n    deffuncao   : DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES\n    \n    args    : NAME COMMA args\n    \n    args :   NAME\n    \n    expression  : term\n    \n    if  : IF LPAR bloco RPAR LCHAVES bloco RCHAVES\n    \n    while   : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES\n    \n    var_assign  : NAME EQUALS term\n                | NAME EQUALS funcao\n    \n    term    : term EXPONENT term\n            | term MULTIPLY term\n            | term DIVIDE term\n            | term DIVIDEINT term\n            | term QUOTIENT term\n            | term MINUS term\n            | term PLUS term\n            | term IGUAL term\n            | term MENOR term\n            | term MAIOR term\n            | term MENORIGUAL term\n            | term MAIORIGUAL term\n    \n    term    : factor\n    \n    factor  : nterm\n            | NUMBER\n            | positive\n            | negative\n    \n    negative    : MINUS term\n    \n    positive    : PLUS term\n    \n    nterm : LPAR term RPAR\n    \n    term    : NAME\n    \n    empty   :\n    '
     
-_lr_action_items = {'DEF':([0,],[4,]),'NAME':([0,4,6,16,17,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,44,68,70,73,77,78,80,],[5,23,27,27,27,45,48,5,5,27,27,27,27,27,27,27,27,27,27,27,27,66,45,45,66,5,5,5,]),'IF':([0,28,29,77,78,80,],[12,12,12,12,12,12,]),'WHILE':([0,28,29,77,78,80,],[13,13,13,13,13,13,]),'$end':([0,1,2,3,5,7,8,9,10,11,14,15,18,19,20,21,22,27,42,43,48,49,50,51,54,55,56,57,58,59,60,61,62,63,64,65,69,84,85,86,],[-43,0,-1,-2,-42,-3,-4,-5,-6,-7,-16,-17,-34,-35,-36,-37,-38,-42,-39,-40,-42,-20,-21,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-8,-18,-19,-13,]),'NUMBER':([0,6,16,17,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,68,70,77,78,80,],[20,20,20,20,47,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,47,47,20,20,20,]),'LPAR':([0,5,6,12,13,16,17,23,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,48,77,78,80,],[6,24,6,28,29,6,6,44,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,24,6,6,6,]),'PLUS':([0,5,6,14,16,17,18,19,20,21,22,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,77,78,80,],[17,-42,17,36,17,17,-34,-35,-36,-37,-38,17,36,-42,17,17,17,17,17,17,17,17,17,17,17,17,17,17,-39,-40,-42,36,-41,-22,-23,-24,-25,-26,-27,-28,36,36,36,36,36,17,17,17,]),'MINUS':([0,5,6,14,16,17,18,19,20,21,22,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,77,78,80,],[16,-42,16,35,16,16,-34,-35,-36,-37,-38,16,35,-42,16,16,16,16,16,16,16,16,16,16,16,16,16,16,-39,-40,-42,35,-41,-22,-23,-24,-25,-26,-27,-28,35,35,35,35,35,16,16,16,]),'EQUALS':([5,],[25,]),'EXPONENT':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,30,-34,-35,-36,-37,-38,30,-42,30,30,-42,30,-41,-22,30,30,30,30,30,30,30,30,30,30,30,]),'MULTIPLY':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,31,-34,-35,-36,-37,-38,31,-42,31,31,-42,31,-41,-22,-23,-24,31,31,31,31,31,31,31,31,31,]),'DIVIDE':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,32,-34,-35,-36,-37,-38,32,-42,32,32,-42,32,-41,-22,-23,-24,32,32,32,32,32,32,32,32,32,]),'DIVIDEINT':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,33,-34,-35,-36,-37,-38,33,-42,33,33,-42,33,-41,-22,-23,-24,-25,-26,33,33,33,33,33,33,33,]),'QUOTIENT':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,34,-34,-35,-36,-37,-38,34,-42,34,34,-42,34,-41,-22,-23,-24,-25,-26,34,34,34,34,34,34,34,]),'IGUAL':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,37,-34,-35,-36,-37,-38,37,-42,-39,-40,-42,37,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,]),'MENOR':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,38,-34,-35,-36,-37,-38,38,-42,-39,-40,-42,38,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,]),'MAIOR':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,39,-34,-35,-36,-37,-38,39,-42,-39,-40,-42,39,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,]),'MENORIGUAL':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,40,-34,-35,-36,-37,-38,40,-42,-39,-40,-42,40,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,]),'MAIORIGUAL':([5,14,18,19,20,21,22,26,27,42,43,48,49,51,54,55,56,57,58,59,60,61,62,63,64,65,],[-42,41,-34,-35,-36,-37,-38,41,-42,-39,-40,-42,41,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,]),'RPAR':([5,7,8,9,10,11,14,15,18,19,20,21,22,26,27,28,29,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,69,75,76,79,84,85,],[-42,-3,-4,-5,-6,-7,-16,-17,-34,-35,-36,-37,-38,51,-42,-43,-43,-39,-40,-12,69,-11,-42,-20,-21,-41,71,72,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-15,74,-8,-9,-10,-14,-18,-19,]),'RCHAVES':([5,7,8,9,10,11,14,15,18,19,20,21,22,27,42,43,48,49,50,51,54,55,56,57,58,59,60,61,62,63,64,65,69,77,78,80,81,82,83,84,85,],[-42,-3,-4,-5,-6,-7,-16,-17,-34,-35,-36,-37,-38,-42,-39,-40,-42,-20,-21,-41,-22,-23,-24,-25,-26,-27,-28,-29,-30,-31,-32,-33,-8,-43,-43,-43,84,85,86,-18,-19,]),'COMMA':([45,47,66,],[68,70,73,]),'LCHAVES':([71,72,74,],[77,78,80,]),}
+_lr_action_items = {'DEF':([0,],[5,]),'$end':([0,1,2,3,4,6,8,9,10,11,12,13,14,18,21,22,23,24,25,30,34,47,48,53,54,55,56,57,61,62,63,64,65,66,67,68,69,70,71,72,76,80,92,93,94,],[-48,0,-1,-2,-3,-47,-5,-6,-7,-8,-9,-10,-11,-22,-39,-40,-41,-42,-43,-47,-13,-44,-45,-47,-25,-26,-46,-4,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-14,-12,-23,-24,-19,]),'NAME':([0,5,7,17,19,20,27,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,49,75,77,81,85,86,88,],[6,26,30,30,30,30,50,53,6,6,6,30,30,30,30,30,30,30,30,30,30,30,30,73,50,50,73,6,6,6,]),'IF':([0,31,32,33,85,86,88,],[15,15,15,15,15,15,15,]),'WHILE':([0,31,32,33,85,86,88,],[16,16,16,16,16,16,16,]),'RETURN':([0,31,32,33,60,85,86,88,],[17,17,17,17,17,17,17,17,]),'NUMBER':([0,7,17,19,20,27,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,75,77,85,86,88,],[23,23,23,23,23,52,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,52,52,23,23,23,]),'LPAR':([0,6,7,15,16,17,19,20,26,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,53,85,86,88,],[7,27,7,32,33,7,7,7,49,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,27,7,7,7,]),'PLUS':([0,6,7,17,18,19,20,21,22,23,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,85,86,88,],[20,-47,20,20,41,20,20,-39,-40,-41,-42,-43,20,41,-47,20,20,20,41,20,20,20,20,20,20,20,20,20,20,20,20,-44,-45,-47,41,-46,-27,-28,-29,-30,-31,-32,-33,41,41,41,41,41,20,20,20,]),'MINUS':([0,6,7,17,18,19,20,21,22,23,24,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,85,86,88,],[19,-47,19,19,40,19,19,-39,-40,-41,-42,-43,19,40,-47,19,19,19,40,19,19,19,19,19,19,19,19,19,19,19,19,-44,-45,-47,40,-46,-27,-28,-29,-30,-31,-32,-33,40,40,40,40,40,19,19,19,]),'EQUALS':([6,],[28,]),'EXPONENT':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,35,-39,-40,-41,-42,-43,35,-47,35,35,35,-47,35,-46,-27,35,35,35,35,35,35,35,35,35,35,35,]),'MULTIPLY':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,36,-39,-40,-41,-42,-43,36,-47,36,36,36,-47,36,-46,-27,-28,-29,36,36,36,36,36,36,36,36,36,]),'DIVIDE':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,37,-39,-40,-41,-42,-43,37,-47,37,37,37,-47,37,-46,-27,-28,-29,37,37,37,37,37,37,37,37,37,]),'DIVIDEINT':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,38,-39,-40,-41,-42,-43,38,-47,38,38,38,-47,38,-46,-27,-28,-29,-30,-31,38,38,38,38,38,38,38,]),'QUOTIENT':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,39,-39,-40,-41,-42,-43,39,-47,39,39,39,-47,39,-46,-27,-28,-29,-30,-31,39,39,39,39,39,39,39,]),'IGUAL':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,42,-39,-40,-41,-42,-43,42,-47,42,-44,-45,-47,42,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,]),'MENOR':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,43,-39,-40,-41,-42,-43,43,-47,43,-44,-45,-47,43,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,]),'MAIOR':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,44,-39,-40,-41,-42,-43,44,-47,44,-44,-45,-47,44,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,]),'MENORIGUAL':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,45,-39,-40,-41,-42,-43,45,-47,45,-44,-45,-47,45,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,]),'MAIORIGUAL':([6,18,21,22,23,24,25,29,30,34,47,48,53,54,56,61,62,63,64,65,66,67,68,69,70,71,72,],[-47,46,-39,-40,-41,-42,-43,46,-47,46,-44,-45,-47,46,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,]),'ENDLINE':([6,8,9,10,11,12,13,14,18,21,22,23,24,25,30,34,47,48,53,54,55,56,61,62,63,64,65,66,67,68,69,70,71,72,76,80,92,93,],[-47,31,-6,-7,-8,-9,-10,-11,-22,-39,-40,-41,-42,-43,-47,-13,-44,-45,-47,-25,-26,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-14,-12,-23,-24,]),'RPAR':([6,8,9,10,11,12,13,14,18,21,22,23,24,25,29,30,34,47,48,50,51,52,53,54,55,56,57,58,59,61,62,63,64,65,66,67,68,69,70,71,72,73,74,76,80,83,84,87,92,93,],[-47,-5,-6,-7,-8,-9,-10,-11,-22,-39,-40,-41,-42,-43,56,-47,-13,-44,-45,-18,76,-17,-47,-25,-26,-46,-4,78,79,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-21,82,-14,-12,-15,-16,-20,-23,-24,]),'RCHAVES':([6,8,9,10,11,12,13,14,18,21,22,23,24,25,30,34,47,48,53,54,55,56,57,61,62,63,64,65,66,67,68,69,70,71,72,76,80,89,90,91,92,93,],[-47,-5,-6,-7,-8,-9,-10,-11,-22,-39,-40,-41,-42,-43,-47,-13,-44,-45,-47,-25,-26,-46,-4,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,-14,-12,92,93,94,-23,-24,]),'COMMA':([21,22,23,24,25,30,34,47,48,50,52,56,61,62,63,64,65,66,67,68,69,70,71,72,73,],[-39,-40,-41,-42,-43,-47,60,-44,-45,75,77,-46,-27,-28,-29,-30,-31,-32,-33,-34,-35,-36,-37,-38,81,]),'LCHAVES':([78,79,82,],[85,86,88,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'contexto':([0,],[1,]),'deffuncao':([0,],[2,]),'bloco':([0,28,29,77,78,80,],[3,52,53,81,82,83,]),'funcao':([0,25,28,29,77,78,80,],[7,50,7,7,7,7,7,]),'if':([0,28,29,77,78,80,],[8,8,8,8,8,8,]),'while':([0,28,29,77,78,80,],[9,9,9,9,9,9,]),'var_assign':([0,28,29,77,78,80,],[10,10,10,10,10,10,]),'expression':([0,28,29,77,78,80,],[11,11,11,11,11,11,]),'term':([0,6,16,17,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,77,78,80,],[14,26,42,43,49,14,14,54,55,56,57,58,59,60,61,62,63,64,65,14,14,14,]),'empty':([0,28,29,77,78,80,],[15,15,15,15,15,15,]),'factor':([0,6,16,17,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,77,78,80,],[18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,]),'nterm':([0,6,16,17,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,77,78,80,],[19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),'positive':([0,6,16,17,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,77,78,80,],[21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,]),'negative':([0,6,16,17,25,28,29,30,31,32,33,34,35,36,37,38,39,40,41,77,78,80,],[22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'values':([24,68,70,],[46,75,76,]),'args':([44,73,],[67,79,]),}
+_lr_goto_items = {'contexto':([0,],[1,]),'deffuncao':([0,],[2,]),'bloco':([0,31,32,33,85,86,88,],[3,57,58,59,89,90,91,]),'empty':([0,],[4,]),'linha':([0,31,32,33,85,86,88,],[8,8,8,8,8,8,8,]),'funcao':([0,28,31,32,33,85,86,88,],[9,55,9,9,9,9,9,9,]),'if':([0,31,32,33,85,86,88,],[10,10,10,10,10,10,10,]),'while':([0,31,32,33,85,86,88,],[11,11,11,11,11,11,11,]),'return':([0,31,32,33,60,85,86,88,],[12,12,12,12,80,12,12,12,]),'var_assign':([0,31,32,33,85,86,88,],[13,13,13,13,13,13,13,]),'expression':([0,31,32,33,85,86,88,],[14,14,14,14,14,14,14,]),'term':([0,7,17,19,20,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,85,86,88,],[18,29,34,47,48,54,18,18,18,61,62,63,64,65,66,67,68,69,70,71,72,18,18,18,]),'factor':([0,7,17,19,20,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,85,86,88,],[21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,]),'nterm':([0,7,17,19,20,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,85,86,88,],[22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'positive':([0,7,17,19,20,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,85,86,88,],[24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,]),'negative':([0,7,17,19,20,28,31,32,33,35,36,37,38,39,40,41,42,43,44,45,46,85,86,88,],[25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,]),'values':([27,75,77,],[51,83,84,]),'args':([49,81,],[74,87,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,45 +29,50 @@ _lr_productions = [
   ("S' -> contexto","S'",1,None,None,None),
   ('contexto -> deffuncao','contexto',1,'p_contexto','PARSER.PY',120),
   ('contexto -> bloco','contexto',1,'p_contexto','PARSER.PY',121),
-  ('bloco -> funcao','bloco',1,'p_bloco','PARSER.PY',127),
-  ('bloco -> if','bloco',1,'p_bloco','PARSER.PY',128),
-  ('bloco -> while','bloco',1,'p_bloco','PARSER.PY',129),
-  ('bloco -> var_assign','bloco',1,'p_bloco','PARSER.PY',130),
-  ('bloco -> expression','bloco',1,'p_bloco','PARSER.PY',131),
-  ('funcao -> NAME LPAR values RPAR','funcao',4,'p_funcao','PARSER.PY',137),
-  ('values -> NAME COMMA values','values',3,'p_values_value_name','PARSER.PY',144),
-  ('values -> NUMBER COMMA values','values',3,'p_values_value_number','PARSER.PY',150),
-  ('values -> NUMBER','values',1,'p_values_number','PARSER.PY',156),
-  ('values -> NAME','values',1,'p_values_name','PARSER.PY',162),
-  ('deffuncao -> DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES','deffuncao',8,'p_deffuncao','PARSER.PY',170),
-  ('args -> NAME COMMA args','args',3,'p_args','PARSER.PY',177),
-  ('args -> NAME','args',1,'p_args_arg','PARSER.PY',183),
-  ('expression -> term','expression',1,'p_expression','PARSER.PY',190),
-  ('expression -> empty','expression',1,'p_expression','PARSER.PY',191),
-  ('if -> IF LPAR bloco RPAR LCHAVES bloco RCHAVES','if',7,'p_if','PARSER.PY',199),
-  ('while -> WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES','while',7,'p_while','PARSER.PY',206),
-  ('var_assign -> NAME EQUALS term','var_assign',3,'p_var_assign','PARSER.PY',220),
-  ('var_assign -> NAME EQUALS funcao','var_assign',3,'p_var_assign','PARSER.PY',221),
-  ('term -> term EXPONENT term','term',3,'p_term','PARSER.PY',228),
-  ('term -> term MULTIPLY term','term',3,'p_term','PARSER.PY',229),
-  ('term -> term DIVIDE term','term',3,'p_term','PARSER.PY',230),
-  ('term -> term DIVIDEINT term','term',3,'p_term','PARSER.PY',231),
-  ('term -> term QUOTIENT term','term',3,'p_term','PARSER.PY',232),
-  ('term -> term MINUS term','term',3,'p_term','PARSER.PY',233),
-  ('term -> term PLUS term','term',3,'p_term','PARSER.PY',234),
-  ('term -> term IGUAL term','term',3,'p_term','PARSER.PY',235),
-  ('term -> term MENOR term','term',3,'p_term','PARSER.PY',236),
-  ('term -> term MAIOR term','term',3,'p_term','PARSER.PY',237),
-  ('term -> term MENORIGUAL term','term',3,'p_term','PARSER.PY',238),
-  ('term -> term MAIORIGUAL term','term',3,'p_term','PARSER.PY',239),
-  ('term -> factor','term',1,'p_term_factor','PARSER.PY',246),
-  ('factor -> nterm','factor',1,'p_factor','PARSER.PY',253),
-  ('factor -> NUMBER','factor',1,'p_factor','PARSER.PY',254),
-  ('factor -> positive','factor',1,'p_factor','PARSER.PY',255),
-  ('factor -> negative','factor',1,'p_factor','PARSER.PY',256),
-  ('negative -> MINUS term','negative',2,'p_negative','PARSER.PY',263),
-  ('positive -> PLUS term','positive',2,'p_positive','PARSER.PY',269),
-  ('nterm -> LPAR term RPAR','nterm',3,'p_nterm','PARSER.PY',276),
-  ('term -> NAME','term',1,'p_term_var','PARSER.PY',283),
-  ('empty -> <empty>','empty',0,'p_empty','PARSER.PY',292),
+  ('contexto -> empty','contexto',1,'p_contexto','PARSER.PY',122),
+  ('bloco -> linha ENDLINE bloco','bloco',3,'p_bloco_linhas','PARSER.PY',129),
+  ('bloco -> linha','bloco',1,'p_bloco_linha','PARSER.PY',136),
+  ('linha -> funcao','linha',1,'p_linha','PARSER.PY',143),
+  ('linha -> if','linha',1,'p_linha','PARSER.PY',144),
+  ('linha -> while','linha',1,'p_linha','PARSER.PY',145),
+  ('linha -> return','linha',1,'p_linha','PARSER.PY',146),
+  ('linha -> var_assign','linha',1,'p_linha','PARSER.PY',147),
+  ('linha -> expression','linha',1,'p_linha','PARSER.PY',148),
+  ('return -> RETURN term COMMA return','return',4,'p_return','PARSER.PY',157),
+  ('return -> RETURN term','return',2,'p_return_return','PARSER.PY',163),
+  ('funcao -> NAME LPAR values RPAR','funcao',4,'p_funcao','PARSER.PY',170),
+  ('values -> NAME COMMA values','values',3,'p_values_value_name','PARSER.PY',177),
+  ('values -> NUMBER COMMA values','values',3,'p_values_value_number','PARSER.PY',183),
+  ('values -> NUMBER','values',1,'p_values_number','PARSER.PY',189),
+  ('values -> NAME','values',1,'p_values_name','PARSER.PY',195),
+  ('deffuncao -> DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES','deffuncao',8,'p_deffuncao','PARSER.PY',203),
+  ('args -> NAME COMMA args','args',3,'p_args','PARSER.PY',210),
+  ('args -> NAME','args',1,'p_args_arg','PARSER.PY',216),
+  ('expression -> term','expression',1,'p_expression','PARSER.PY',223),
+  ('if -> IF LPAR bloco RPAR LCHAVES bloco RCHAVES','if',7,'p_if','PARSER.PY',231),
+  ('while -> WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES','while',7,'p_while','PARSER.PY',237),
+  ('var_assign -> NAME EQUALS term','var_assign',3,'p_var_assign','PARSER.PY',250),
+  ('var_assign -> NAME EQUALS funcao','var_assign',3,'p_var_assign','PARSER.PY',251),
+  ('term -> term EXPONENT term','term',3,'p_term','PARSER.PY',258),
+  ('term -> term MULTIPLY term','term',3,'p_term','PARSER.PY',259),
+  ('term -> term DIVIDE term','term',3,'p_term','PARSER.PY',260),
+  ('term -> term DIVIDEINT term','term',3,'p_term','PARSER.PY',261),
+  ('term -> term QUOTIENT term','term',3,'p_term','PARSER.PY',262),
+  ('term -> term MINUS term','term',3,'p_term','PARSER.PY',263),
+  ('term -> term PLUS term','term',3,'p_term','PARSER.PY',264),
+  ('term -> term IGUAL term','term',3,'p_term','PARSER.PY',265),
+  ('term -> term MENOR term','term',3,'p_term','PARSER.PY',266),
+  ('term -> term MAIOR term','term',3,'p_term','PARSER.PY',267),
+  ('term -> term MENORIGUAL term','term',3,'p_term','PARSER.PY',268),
+  ('term -> term MAIORIGUAL term','term',3,'p_term','PARSER.PY',269),
+  ('term -> factor','term',1,'p_term_factor','PARSER.PY',276),
+  ('factor -> nterm','factor',1,'p_factor','PARSER.PY',283),
+  ('factor -> NUMBER','factor',1,'p_factor','PARSER.PY',284),
+  ('factor -> positive','factor',1,'p_factor','PARSER.PY',285),
+  ('factor -> negative','factor',1,'p_factor','PARSER.PY',286),
+  ('negative -> MINUS term','negative',2,'p_negative','PARSER.PY',293),
+  ('positive -> PLUS term','positive',2,'p_positive','PARSER.PY',299),
+  ('nterm -> LPAR term RPAR','nterm',3,'p_nterm','PARSER.PY',306),
+  ('term -> NAME','term',1,'p_term_var','PARSER.PY',313),
+  ('empty -> <empty>','empty',0,'p_empty','PARSER.PY',322),
 ]

@@ -3,10 +3,6 @@ import ply.lex as lex
 from ply import *
 import sys
 
-keywords = (
-    'LET', 'READ', 'DATA', 'PRINT', 'GOTO', 'IF', 'THEN', 'FOR', 'NEXT', 'TO', 'STEP',
-    'END', 'STOP', 'DEF', 'GOSUB', 'DIM', 'REM', 'RETURN', 'RUN', 'LIST', 'NEW',
-)
 
 '''
 Definicao o conjunto dos tokens
@@ -36,7 +32,8 @@ tokens = [
     'MENOR',
     'MAIOR',
     'MENORIGUAL',
-    'MAIORIGUAL'
+    'MAIORIGUAL',
+    'RETURN'
 ]
 
 # Definindo os tokens onde tokens = conjunto
@@ -87,7 +84,10 @@ def t_WHILE(tokens):
     tokens.type = 'WHILE'
     return tokens
 
-
+def t_RETURN(tokens):
+    r'return'
+    tokens.type = 'RETURN'
+    return tokens
 
 # Definindo name para variaveis, exige uma letra e pode ser seguido por letras ou numeros 
 def t_NAME(tokens):
@@ -119,18 +119,51 @@ def p_contexto(entrada):
     '''
     contexto    : deffuncao
                 | bloco
+                | empty
     '''
     print(run(entrada[1]))
 
-def p_bloco(entrada):
+
+def p_bloco_linhas(entrada):
     '''
-    bloco   : funcao
+    bloco   : linha ENDLINE bloco
+    '''
+    entrada[0] = ('blocoLinhas',entrada[1],entrada[3])
+
+
+def p_bloco_linha(entrada):
+    '''
+    bloco   : linha
+    '''
+    entrada[0] = entrada[1]
+
+
+def p_linha(entrada):
+    '''
+    linha   : funcao
             | if
             | while
+            | return
             | var_assign
             | expression
     '''
     entrada[0] = entrada[1]
+
+
+
+
+def p_return(entrada):
+    '''
+    return  : RETURN term COMMA return
+    '''
+    entrada[0] = ('returns',entrada[2],entrada[4])
+
+def p_return_return(entrada):
+    '''
+    return  : RETURN term
+    '''
+    entrada[0] = ('return',entrada[2])
+
 
 def p_funcao(entrada):
     '''
@@ -188,7 +221,6 @@ def p_args_arg(entrada):
 def p_expression(entrada):
     '''
     expression  : term
-                | empty
     '''
     entrada[0] = entrada[1]
     
@@ -198,14 +230,12 @@ def p_if(entrada):
     '''
     if  : IF LPAR bloco RPAR LCHAVES bloco RCHAVES
     '''
-    print("entrou if")
     entrada[0] = ('if',entrada[3],entrada[6])
 
 def p_while(entrada):
     '''
     while   : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
     '''
-    print("entrou while")
     entrada[0] = ('while',entrada[3],entrada[6])
 
 #def p_linha(entrada):
@@ -284,8 +314,8 @@ def p_term_var(entrada):
     '''
     entrada[0] = ('var', entrada[1])
 
-def p_error(entrada):
-    print("Syntax error found!" + entrada.value)
+#def p_error(entrada):
+#    print("Syntax error found!" + entrada.value)
 
 def p_empty(entrada):
     '''
@@ -317,8 +347,9 @@ def run(entrada):
             return run(entrada[1]) ** run(entrada[2])
         elif entrada[0] == '=':
             if (contexto == ''):
-                env[entrada[1]] = run(entrada[2])
-                return entrada[2]
+                resultado = run(entrada[2])
+                env[entrada[1]] = resultado
+                return resultado
             else:
                 env[contexto+entrada[1]] = run(entrada[2])
                 return entrada[2]
@@ -340,21 +371,28 @@ def run(entrada):
                 print ('não executa if')
         elif entrada[0] == 'while':
             while (run(entrada[1])):
-                resultado = run(entrada[2])
+                run(entrada[2])
         elif entrada[0] == 'var':
             if contexto+entrada[1] in env:
                 return env[contexto+entrada[1]]
             elif entrada[1] in env:
                 return env[entrada[1]]
             else:
-                return 'Undeclared variable found!'
+                print ('Undeclared variable found! -> ' + entrada[1])
+                return None
         elif entrada[0] == 'def':
             env['func'+entrada[1]] = []
+            # para variaveis
             env['func'+entrada[1]].append([])
+            # para bloco
             env['func'+entrada[1]].append([])
+            # para valores
             env['func'+entrada[1]].append([])
+            # para retorno
+            env['func'+entrada[1]].append([]) 
             env['func'+entrada[1]][1].append(entrada[3])
             contexto = entrada[1]
+            print("vai rodar as variaveis")
             run(entrada[2])
             contexto=''
         elif entrada[0] == 'fcs':
@@ -365,15 +403,38 @@ def run(entrada):
         elif entrada[0] == 'func':
             contexto = entrada[1]
             run(entrada[2])
-            resultado = rodaFuncao("func"+contexto)
+            rodaFuncao("func"+contexto)
             env["func"+contexto][2]=[]
             limpaVarFun("func"+contexto)
-            contexto=''
-            return resultado
+            #retornando resultados da função
+            listaResultados = []
+            # caso um resultado
+            if (len(env["func"+contexto][3])==0):
+                print("funcao sem retorno")
+                contexto=''
+                return None
+            if (len(env["func"+contexto][3]) == 1 ):
+                resultado = run(env["func"+contexto][3])
+                contexto=''
+                return resultado
+            #caso vários resultados
+            else:
+                for  i in env["func"+contexto][3] :
+                    listaResultados.append(run(i))
+                contexto=''
+                return listaResultados
         elif entrada[0] == 'value':
             env['func'+contexto][2].append(run(entrada[1]))
         elif entrada[0] == 'values':
             env['func'+contexto][2].append(run(entrada[1]))
+            run(entrada[2])
+        elif entrada[0] == 'blocoLinhas':
+            run(entrada[1])
+            run(entrada[2])
+        elif entrada[0] == 'return':
+            env['func'+contexto][3].append(run(entrada[1]))
+        elif entrada[0] == 'returns':
+            env['func'+contexto][3].append(run(entrada[1]))
             run(entrada[2])
     else:
         return entrada

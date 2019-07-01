@@ -1,0 +1,33 @@
+a = 2
+b = 10
+a + b
+a - b
+a * b
+b / a
+b // a
+b % a
+
+if (a<b){a = b}
+a
+
+a = 2
+while (a<b) {a = a + 1}
+a
+
+a = 2
+b = 10
+def soma(a,b) {return a + b}
+resultado = soma (a,b)
+resultado
+
+a = 2
+b = 10
+def multSe(a,b){if(a<b){a = 2 * b ; return a}}
+multSe(a,b)
+
+a = 2
+b = 20
+i=0
+while(i<a){ i = i + 1}
+
+exit

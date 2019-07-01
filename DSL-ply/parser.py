@@ -101,9 +101,6 @@ def t_error(tokens):
 
 lexer = lex.lex()
 
-env = {}
-contexto = ''
-
 # Definindo as precedencias
 precedence = (
     ('left','IGUAL','MENOR','MAIOR','MENORIGUAL','MAIORIGUAL'),
@@ -121,7 +118,7 @@ def p_contexto(entrada):
                 | bloco
                 | empty
     '''
-    print(run(entrada[1]))
+    entrada[0] = entrada[1]
 
 
 def p_bloco_linhas(entrada):
@@ -148,8 +145,6 @@ def p_linha(entrada):
             | expression
     '''
     entrada[0] = entrada[1]
-
-
 
 
 def p_return(entrada):
@@ -238,11 +233,7 @@ def p_while(entrada):
     '''
     entrada[0] = ('while',entrada[3],entrada[6])
 
-#def p_linha(entrada):
-#    '''
-#    linha   : expression ENDLINE
-#    '''
-#    entrada[0] = entrada[1]
+
  
 # Definicao de como passar um valor para uma variavel 
 def p_var_assign(entrada):
@@ -314,8 +305,6 @@ def p_term_var(entrada):
     '''
     entrada[0] = ('var', entrada[1])
 
-#def p_error(entrada):
-#    print("Syntax error found!" + entrada.value)
 
 def p_empty(entrada):
     '''
@@ -325,6 +314,9 @@ def p_empty(entrada):
 
 parser = yacc.yacc()
 # env é um dicionário que contém as variáveis. Este dicionário é global.
+
+env = {}
+contexto = ''
 
 # Executando a string de entrada
 def run(entrada):
@@ -351,8 +343,9 @@ def run(entrada):
                 env[entrada[1]] = resultado
                 return resultado
             else:
-                env[contexto+entrada[1]] = run(entrada[2])
-                return entrada[2]
+                resultado = run(entrada[2])
+                env[contexto+entrada[1]] = resultado
+                return resultado
         elif entrada[0] == '==':
             return run(entrada[1]) == run(entrada[2])
         elif entrada[0] == '>':
@@ -365,10 +358,9 @@ def run(entrada):
             return run(entrada[1]) <= run(entrada[2])
         elif entrada[0] == 'if':
             if (run(entrada[1])):
-                print ('executa if')
                 return run(entrada[2])
             else:
-                print ('não executa if')
+                print ('não executou if')
         elif entrada[0] == 'while':
             while (run(entrada[1])):
                 run(entrada[2])
@@ -392,7 +384,6 @@ def run(entrada):
             env['func'+entrada[1]].append([]) 
             env['func'+entrada[1]][1].append(entrada[3])
             contexto = entrada[1]
-            print("vai rodar as variaveis")
             run(entrada[2])
             contexto=''
         elif entrada[0] == 'fcs':
@@ -449,31 +440,44 @@ def rodaFuncao (fun):
         i = 0
         while (i < len(env[fun][2])) :
             env[contexto+env[fun][0][i]] = env[fun][2][i]          
-            #print(str(contexto+env[fun][0][i]) + " com o  valor " + str(env[fun][2][i]))
             i+=1
-        #print ( run(env[fun][1][0]) )
-    
     return run(env[fun][1][0])
 
 
 def limpaVarFun(fun):
     i = 0
-    #lst = []
     while (i < len(env[fun][0])) :
         env.pop(contexto+env[fun][0][i])
         i+=1
     return 0
 
-while True:
-    s = input('>> ')
-    if s == 'exit':
-        break
-    try:
-        lexer.input(s)
-        while True:
-            tok = lexer.token()
-            if not tok:
-                break           
-    except EOFError:
-        break
-    parser.parse(s)
+verificador = True
+while verificador:
+    arqEntrada = open("../teste/entrada.txt", 'r')
+    arqSaida = open("../teste/saida.txt", 'w+')
+    entrada = arqEntrada.readlines()
+    aux=''
+    for linha in entrada:
+        linha= linha[:len(linha)-1]
+        if str(linha) == 'exit':
+            verificador = False
+        elif linha != '':
+            try:
+                lexer.input(linha)
+                while True:
+                    tok = lexer.token()
+                    if not tok:
+                        break           
+            except EOFError:
+                None
+            result = run(parser.parse(linha))
+            
+            if result == None:
+                None
+            else:
+                aux += str(result)
+                aux += '\n'
+                print(aux)
+    arqSaida.writelines(aux)
+    arqEntrada.close()
+    arqSaida.close()

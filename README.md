@@ -340,7 +340,7 @@ def p_empty(entrada):
 
 #### Para a execução do parser é necessário instalar o python e a biblioteca ply.  
 
-##_Instalando python_.  
+### _Instalando python_.  
 
 ###_Windows_  
 Acessar o site oficial do [python](https://www.python.org/downloads/) realizar o download,  
@@ -373,7 +373,7 @@ python3.7 -V
 Caso retorne Python-3.7.3 a instalação foi realizada com sucesso.
 
 
-##_Instalando biblioteca ply_  
+### _Instalando biblioteca ply_  
 
 Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o conteudo do arquivo compactado e acessar a  
 pasta ply-3.11, onde está localizado o arquivo setup.py, por linha de comando e executar o seguinte comando python setup.py install  

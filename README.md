@@ -340,25 +340,43 @@ def p_empty(entrada):
 ````
 
 
-#### Instalando o Lark:
-Para poder instalar o Lark, primeiro precisamos instalar o [Pip](https://pypi.org/project/pip/).
+#### Para a execução do parser é necessário instalar o python e a biblioteca ply.  
 
-1. Começamos atualizando a lista de pacotes:
+##_Instalando python_.  
 
-    ``$ sudo apt update``
+###_Windows_  
+Acessar o site oficial do [python](https://www.python.org/downloads/) realizar o download,  
+Antes de iniciar a instalação selecione a opção de configurar o path, avance e aguarde o fim da instalação.  
 
-2. Como estamos utilizando o Python 3, instalaremos o Pip com o seguinte comando:
+###_Linux_  
+_Passo 1 - Pré requisitos_  
+Execute na linha de comando:  
+sudo apt-get install build-essential checkinstall  
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev  
 
-    ``$ sudo apt install python3-pip``
+_Passo 2 - Download do python 3.7_  
+Execute na linha de comando:  
+cd /usr/src  
+sudo wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz  
 
-3. Para verificar se o Pip foi instalado corretamente, fazemos:
+Agora extraia o pacote com o comando:  
+sudo tar xzf Python-3.7.3.tgz  
 
-    ``$ pip3 --version``c
+_Passo 3 instale o python_  
+Execute na linha de comando:  
+cd Python-3.7.3  
+sudo ./configure --enable-optimizations  
+sudo make altinstall  
 
-    Teremos como retorno algo similar a:
+_Passo 4 cheque a instalação do python_  
+Execute na linha de comando:  
+python3.7 -V  
 
-    ``pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)``
+Caso retorne Python-3.7.3 a instalação foi realizada com sucesso.
 
-4. Agora, para instalar o Lark, basta fazer:
 
-    ``$ pip3 install lark-parser``
+##_Instalando biblioteca ply_  
+
+Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o conteudo do arquivo compactado e acessar a  
+pasta ply-3.11, onde está localizado o arquivo setup.py, por linha de comando e executar o seguinte comando python setup.py install  
+dependendo do SO pode ser que seja necessário usar python3 setup.py install.

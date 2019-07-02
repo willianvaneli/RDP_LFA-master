@@ -2,141 +2,96 @@
 
 [Especificações do trabalho](lfa-trab-final-2019-1.pdf)
 
-### Grupo:
+## Grupo:
 - Ewerson Vieira Nascimento (ewersonv@gmail.com)
 - Paulo Ricardo Viana Ferreira (paulo_ricardosf@outlook.com)
 - Willian Bruschi Vaneli (willianvaneli@gmail.com)
 
-#### Ambiente de desenvolvimento:
+## Ambiente de desenvolvimento:
 - Programa desenvolvido em Python (3.6.7) 
 - Biblioteca [Ply](https://www.dabeaz.com/ply/)
 - Visual studio code
 - Windows
 
-### Descrição da linguagem:
+## Introdução:
 A DSL proposta neste trabalho tem como objetivo prover uma linguagem que permita realizar operações matemáticas aritméticas. Optamos por utilizar a linguagem Python para o desenvolvimento pela facilidade que os integrantes do grupo possuem com a mesma.
-A linguagem permite utilizar artefatos de nomeação de variáveis, além de construção de comandos de seleção IF e repetição WHILE. Permitindo também artefatos de abstração conhecidos como função ou procedimento, utilizados nas diversas outras linguagens de programação. 
+A linguagem permite utilizar artefatos de nomeação de variáveis, além de construção de comandos de seleção IF e repetição WHILE. Permitindo também artefatos de abstração conhecidos como função ou procedimento, utilizados nas diversas outras linguagens de programação.
 
-### Justificativa uso da biblioteca Ply:
-A biblioteca Ply apresenta facilidade de declaração dos tokens e EBNF, onde é possível separar cada declaração e trata-la de modo exclusivo.
-
-
-### Tabela com Operadores e Expressões:
-
-Operador | Descrição
---------- | ------
-=              | Atribuição. Ex.: <variável> = <conteúdo>;
-==,>,<,>=,<=   | Comparadores lógicos
-{ }            | Delimitadores de bloco, podem ser usados em IF, While, declaração de função ou em chamada de função;
-+,-,*,/,^,//,% | Operadores aritiméticos;
-    
-    
-Expressão | Descrição
---------- | ------
-def         | Expressão que define uma função. Ex.: def <nome-do-método>(<argumentos>){ };
-if          | Expressão que indica uma estrutura de seleção. Ex.: if (<condição>){<bloco>};
-while       | Expressão que indica um loop. Ex.: while (<condição>){<operações>*};
-
-### Estrutura da aplicação
-
-```
-trabalho-final-lfa-DHM
-|_ DSL-ply
-  |_ ply (pasta da biblioteca ply)
-  |_parser.out
-  |_parser.py
-  |_parsertab.py
-|_ Testes
-  |_ 
-|_ Readme.md
-|_ relatório.pdf
-```
-
-### Descrição dos arquivos:
-
-Arquivo | Descrição
---------- | ------
-[parser.py](DSL-ply/parser.py)    | Arquivo contendo a gramática em EBNF da linguagem e demais funções desenvolvidas em python. 
-[pasrsetab.py](DSL-ply/parsetab.py)    | Arquivo gerado automaticamente pelo Ply contendo informações de execução do parser.
-[parser.out](DSL-ply/parser.out) | Arquivo gerado pelo Ply contendo informações sobre a gramática e os estados do parser.
-
+## Definição da DSL
 ### Gramática
 Gramática em EBNF
 
-````
-    '''
-    contexto    : deffuncao
-                | bloco
-                | empty
-    '''
-    bloco       : linha [ENDLINE bloco]*
-    '''
-    linha       : funcao
-                | if
-                | while
-                | return
-                | var_assign
-                | expression
-    '''
-    return      : RETURN term [COMMA return]*
-    '''
-    funcao      : NAME LPAR values RPAR
-    '''
-    values      : NAME [COMMA values]*
-                | NUMBER [COMMA values]*
-    '''
-    deffuncao   : DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES
-    '''
-    args        : NAME [COMMA args]*
-    '''
-    expression  : term
-    '''
-    if          : IF LPAR bloco RPAR LCHAVES bloco RCHAVES
-    '''
-    while       : WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
-    '''
-    var_assign  : NAME EQUALS term
-                | NAME EQUALS funcao
-    '''
-    term        : term EXPONENT term
-                | term MULTIPLY term
-                | term DIVIDE term
-                | term DIVIDEINT term
-                | term QUOTIENT term
-                | term MINUS term
-                | term PLUS term
-                | term IGUAL term
-                | term MENOR term
-                | term MAIOR term
-                | term MENORIGUAL term
-                | term MAIORIGUAL term
-                | term IGUAL funcao
-                | term MENOR funcao
-                | term MAIOR funcao
-                | term MENORIGUAL funcao
-                | term MAIORIGUAL funcao
-                | fator
-                | NAME
-    '''
-    factor      : nterm
-                | NUMBER
-                | positive
-                | negative
-    '''
-    negative    : MINUS term
-    '''
-    positive    : PLUS term
-    '''
-    nterm       : LPAR term RPAR
-    '''
-    empty       :
-    '''
+```
+contexto    ::= deffuncao
+            | bloco
+            | empty
 
-````
+bloco       ::= linha [ENDLINE bloco]*
 
-Gramática no código
+linha       ::= funcao
+            | if
+            | while
+            | return
+            | var_assign
+            | expression
 
-````
+return      ::= RETURN term [COMMA return]*
+
+funcao      ::= NAME LPAR values RPAR
+
+values      ::= NAME [COMMA values]*
+            | NUMBER [COMMA values]*
+
+deffuncao   ::= DEF NAME LPAR args RPAR LCHAVES bloco RCHAVES
+
+args        ::= NAME [COMMA args]*
+
+expression  ::= term
+
+if          ::= IF LPAR bloco RPAR LCHAVES bloco RCHAVES
+
+while       ::= WHILE LPAR bloco RPAR LCHAVES bloco RCHAVES
+
+var_assign  ::= NAME EQUALS term
+            | NAME EQUALS funcao
+
+term        ::= term EXPONENT term
+            | term MULTIPLY term
+            | term DIVIDE term
+            | term DIVIDEINT term
+            | term QUOTIENT term
+            | term MINUS term
+            | term PLUS term
+            | term IGUAL term
+            | term MENOR term
+            | term MAIOR term
+            | term MENORIGUAL term
+            | term MAIORIGUAL term
+            | term IGUAL funcao
+            | term MENOR funcao
+            | term MAIOR funcao
+            | term MENORIGUAL funcao
+            | term MAIORIGUAL funcao
+            | fator
+            | NAME
+
+factor      ::= nterm
+            | NUMBER
+            | positive
+            | negative
+
+negative    ::= MINUS term
+
+positive    ::= PLUS term
+
+nterm       ::= LPAR term RPAR
+
+empty       ::=
+```
+
+### Gramática no código
+
+````python
 precedence = (
     ('left','IGUAL','MENOR','MAIOR','MENORIGUAL','MAIORIGUAL'),
     ('left','PLUS','MINUS'),
@@ -188,6 +143,7 @@ def p_return(entrada):
     '''
     entrada[0] = ('returns',entrada[2],entrada[4])
 
+
 def p_return_return(entrada):
     '''
     return  : RETURN term
@@ -208,11 +164,13 @@ def p_values_value_name(entrada):
     '''
     entrada[0]= ('values',('var',entrada[1]),entrada[3])
 
+
 def p_values_value_number(entrada):
     '''
     values  : NUMBER COMMA values
     '''
     entrada[0]= ('values',entrada[1],entrada[3])
+
 
 def p_values_number(entrada):
     '''
@@ -220,12 +178,12 @@ def p_values_number(entrada):
     '''
     entrada[0]= ('value',entrada[1])
 
+
 def p_values_name(entrada):
     '''
     values  : NAME
     '''
     entrada[0]= ('value',('var',entrada[1]))
-
 
 
 def p_deffuncao(entrada):
@@ -253,7 +211,6 @@ def p_expression(entrada):
     expression  : term
     '''
     entrada[0] = entrada[1]
-    
 
 
 def p_if(entrada):
@@ -344,13 +301,66 @@ def p_empty(entrada):
     '''
     entrada[0]= entrada
 
-
 ````
+
+### Diagrama de sintaxe
+~ falta fazer ~
+
+### Exemplos de código
+~ falta fazer ~
+
+## Definição da AST
+~ dividir o código em classes para fazer o diagrama de classes ~
+
+
+
+## Justificativa uso da biblioteca Ply:
+A biblioteca Ply apresenta facilidade de declaração dos tokens e EBNF, onde é possível separar cada declaração e trata-la de modo exclusivo.
+
+
+## Tabela com Operadores e Expressões:
+
+Operador | Descrição
+--------- | ------
+=              | Atribuição. Ex.: <variável> = <conteúdo>;
+==,>,<,>=,<=   | Comparadores lógicos
+{ }            | Delimitadores de bloco, podem ser usados em IF, While, declaração de função ou em chamada de função;
++,-,*,/,^,//,% | Operadores aritiméticos;
+    
+    
+Expressão | Descrição
+--------- | ------
+def         | Expressão que define uma função. Ex.: def <nome-do-método>(<argumentos>){ };
+if          | Expressão que indica uma estrutura de seleção. Ex.: if (<condição>){<bloco>};
+while       | Expressão que indica um loop. Ex.: while (<condição>){<operações>*};
+
+## Estrutura da aplicação
+
+```
+trabalho-final-lfa-DHM
+|_ DSL-ply
+  |_ ply (pasta da biblioteca ply)
+  |_parser.out
+  |_parser.py
+  |_parsertab.py
+|_ Testes
+  |_ 
+|_ Readme.md
+|_ relatório.pdf
+```
+
+### Descrição dos arquivos:
+
+Arquivo | Descrição
+--------- | ------
+[parser.py](DSL-ply/parser.py)    | Arquivo contendo a gramática em EBNF da linguagem e demais funções desenvolvidas em python. 
+[pasrsetab.py](DSL-ply/parsetab.py)    | Arquivo gerado automaticamente pelo Ply contendo informações de execução do parser.
+[parser.out](DSL-ply/parser.out) | Arquivo gerado pelo Ply contendo informações sobre a gramática e os estados do parser.
 
 
 #### Para a execução do parser é necessário instalar o python e a biblioteca ply.  
 
-### Instalando python.  
+## Instalando python.  
 
 ### _Windows_  
 Acessar o site oficial do [python](https://www.python.org/downloads/) realizar o download,  
@@ -395,7 +405,7 @@ Execute na linha de comando:
 Caso retorne ``Python-3.7.3`` a instalação foi realizada com sucesso.
 
 
-### _Instalando biblioteca ply_  
+## _Instalando biblioteca ply_  
 
 Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o conteudo do arquivo compactado e acessar a pasta ply-3.11, onde está localizado o arquivo ``setup.py`` por linha de comando e executar o seguinte comando:
 

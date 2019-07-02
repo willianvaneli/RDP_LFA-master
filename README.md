@@ -108,7 +108,6 @@ def p_contexto(entrada):
                 | bloco
                 | empty
     '''
-    print(run(entrada[1]))
 
 
 def p_bloco_linhas(entrada):
@@ -371,36 +370,36 @@ Antes de iniciar a instalação selecione a opção de configurar o path, avance
 
 Execute na linha de comando:
 
-``sudo apt-get install build-essential checkinstall``
+``$ sudo apt-get install build-essential checkinstall``
 
-``sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev``
+``$ sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \ libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev``
 
 #### _Passo 2 - Download do python 3.7_
 
 Execute na linha de comando:
 
-``cd /usr/src``
+``$ cd /usr/src``
 
-``sudo wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz``
+``$ sudo wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz``
 
 Agora extraia o pacote com o comando:
 
-``sudo tar xzf Python-3.7.3.tgz``
+``$ sudo tar xzf Python-3.7.3.tgz``
 
 #### _Passo 3 instale o python_
 
 Execute na linha de comando:
-``cd Python-3.7.3``
+``$ cd Python-3.7.3``
 
-``sudo ./configure --enable-optimizations``
+``$ sudo ./configure --enable-optimizations``
 
-``sudo make altinstall``
+``$ sudo make altinstall``
 
 #### _Passo 4 cheque a instalação do python_  
 
 Execute na linha de comando:  
 
-``python3 --version``
+``$ python3 --version``
 
 Caso retorne ``Python-3.7.3`` a instalação foi realizada com sucesso.
 
@@ -413,4 +412,4 @@ Após fazer o download no [site](http://www.dabeaz.com/ply/) basta extrair o con
 
 dependendo do SO pode ser que seja necessário usar
 
-`` $ python3 setup.py install``
+``$ python3 setup.py install``

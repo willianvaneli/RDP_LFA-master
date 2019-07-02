@@ -110,6 +110,11 @@ Gramática em EBNF
                 | term MAIOR term
                 | term MENORIGUAL term
                 | term MAIORIGUAL term
+                | term IGUAL funcao
+                | term MENOR funcao
+                | term MAIOR funcao
+                | term MENORIGUAL funcao
+                | term MAIORIGUAL funcao
                 | fator
                 | NAME
     '''

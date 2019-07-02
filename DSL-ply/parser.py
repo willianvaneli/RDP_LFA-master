@@ -240,6 +240,7 @@ def p_var_assign(entrada):
     '''
     var_assign  : NAME EQUALS term
                 | NAME EQUALS funcao
+                | NAME EQUALS var_assign
     '''
     entrada[0] = ('=', entrada[1],entrada[3])
 
@@ -258,6 +259,11 @@ def p_term(entrada):
             | term MAIOR term
             | term MENORIGUAL term
             | term MAIORIGUAL term
+            | term IGUAL funcao
+            | term MENOR funcao
+            | term MAIOR funcao
+            | term MENORIGUAL funcao
+            | term MAIORIGUAL funcao
     '''
     entrada[0] = (entrada[2], entrada[1], entrada[3])
 

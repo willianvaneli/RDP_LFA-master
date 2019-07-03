@@ -316,7 +316,6 @@ def p_empty(entrada):
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/empty.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/expression.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/factor.png)
-![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/if.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/negative.png)
 
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/ntermn.png)
@@ -326,6 +325,7 @@ def p_empty(entrada):
 
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/var_assign.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/while.png)
+![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/if.png)
 
 ### Exemplos de código
 

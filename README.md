@@ -305,24 +305,25 @@ def p_empty(entrada):
 ### Diagrama de sintaxe
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/args.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/bloco.png)
+![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/return.png)
+
+![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/linha.png)
+![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/values.png)
+![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/funcao.png)
+
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/contexto.png)
-
-
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/deffuncao.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/empty.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/expression.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/factor.png)
-![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/funcao.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/if.png)
-![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/linha.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/negative.png)
 
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/ntermn.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/positive.png)
-![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/return.png)
+
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/term.png)
 
-![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/values.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/var_assign.png)
 ![Alt Text](https://github.com/willianvaneli/RDP_LFA-master/blob/master/img/while.png)
 

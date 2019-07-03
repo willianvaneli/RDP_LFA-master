@@ -328,30 +328,30 @@ def p_empty(entrada):
 
 ### Exemplos de código
 
-Nomeação de variaveis
-a = 2
-a = b = c = 2
-c = b // a
-a = b = z = pow(2,6)
-lstResults = calc(a,b,c)
+Nomeação de variaveis<br>
+a = 2<br>
+a = b = c = 2<br>
+c = b // a<br>
+a = b = z = pow(2,6)<br>
+lstResults = calc(a,b,c)<br>
 
 
-Estrutura de seleção
-if(a>b){b = b + c; a = a / c; pow(2,6)}
-if(a<b){while(a<b){a=a+1;a=a+1}}
+Estrutura de seleção<br>
+if(a>b){b = b + c; a = a / c; pow(2,6)}<br>
+if(a<b){while(a<b){a=a+1;a=a+1}}<br>
 
 
-Estrutura de repetição
-while(a<=40){a=a+1}
-while(a<100){if(a==20){a = pow(a,2)};a = a + 1}
+Estrutura de repetição<br>
+while(a<=40){a=a+1}<br>
+while(a<100){if(a==20){a = pow(a,2)};a = a + 1}<br>
 
 
 
-Declaração de função
-def funcao2(a,b,c){if(a>b){b = b + c; a = a / c}; return a, return b}
-lstResults = funcao2(a,b,c)
-def pow(a,b){a = a ^ b; return a}
-while(a<100){a = pow(a,b)}
+Declaração de função<br>
+def funcao2(a,b,c){if(a>b){b = b + c; a = a / c}; return a, return b}<br>
+lstResults = funcao2(a,b,c)<br>
+def pow(a,b){a = a ^ b; return a}<br>
+while(a<100){a = pow(a,b)}<br>
 
 ## Definição da AST
 ~ dividir o código em classes para fazer o diagrama de classes ~
